@@ -1,0 +1,69 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Students</title>
+          <link rel="stylesheet" href="../css/foundation.css" />
+      <script src="../js/vendor/modernizr.js"></script>
+  </head>
+  <body>
+<div class="row">
+            <div class="large-12 columns">
+                <h1>All students in George Washington University</h1>
+            </div>
+            <div class="row">
+            <div class="large-4 columns">
+          <input type="text" placeholder="Search for the User">
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="panel">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="300">Student Name</th>
+                                <th width="300">Email</th>
+                                <th>Username</th>
+                                <th width="240">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#">John Boo</a></td>
+                                <td>johnny81@email.com</td>
+                                <td>johnny81</td>
+                                <td><a href="#" class="button small round">Edit</a>
+                                    <a href="#" class="button round small alert">Full Unenroll</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">Mary Brown</a></td>
+                                <td>mary_brown@gmail.com</td>
+                                <td>missmary</td>
+                                <td><a href="#" class="button small round">Edit</a>
+                                    <a href="#" class="button round small alert">Full Unenroll</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">James Mooray</a> </td>
+                                <td>mooray@gmail.com</td>
+                                <td>jijames</td>
+                                <td><a href="#" class="button small round">Edit</a>
+                                    <a href="#" class="button round small alert">Full Unenroll</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>
