@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Create Course</title>
+        <link rel="stylesheet" href="../css/foundation.css"/>
+        <link rel="stylesheet" href="../css/remind-style.css">
+        <link rel="stylesheet" href="../css/remind-style.css" />
+        <script src="../js/vendor/modernizr.js"></script>
+        <script src="../js/vendor/jquery.js"></script>
+        <script src="../js/foundation.min.js"></script>
+        <script src="../js/moment.min.js"></script>
+        <link rel='stylesheet' href='../fullcalendar-2.3.2/fullcalendar.css' />
+        <script src='../fullcalendar-2.3.2/fullcalendar.js'></script>
+        <script>
+            $(document).ready(function() {
+                // page is now ready, initialize the calendar...
+                $('#calendar').fullCalendar({
+                dayClick: function() {
+                        alert('a day has been clicked!');
+                    }               })
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="#">Remind</a></h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li><a href="#">Manage Courses</a></li>
+                    <li><a href="#">My Courses</a></li>
+                    <li><a href="#">Manage Instructors</a></li>
+                    <li><a href="#">Manage Students</a></li>
+                    <li><a href="#">Me</a></li>
+                </ul>
+            </section>
+        </nav>
+        <div class="row">
+            <div class="large-12 medium-12 small-12">
+                <h1>Create a New Course</h1>
+                <h4>George Washington University</h4>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 medium-4 small-4 columns">
+                <h5>Course Template</h5>
+                <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown semiround">Select a Course</button><br>
+                <ul id="drop1" data-dropdown-content class="f-dropdown semiround" aria-hidden="true">
+                    <li><a href="#">Math 101</a></li>
+                    <li><a href="#">Physics 232</a></li>
+                    <li><a href="#">Braiding Hair</a></li>
+                </ul>
+            </div>
+            <div class="large-4 medium-4 small-4 small-centered columns">
+                <h5>Course Name</h5>
+                <input type="text">
+                <h5>Description</h5>
+                <textarea></textarea>
+                <div id="calendar"></div>
+                 <div class="text-center">
+                    <a class="button success semiround">Submit</a>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).foundation();
+        </script>
+    </body>
+</html>
