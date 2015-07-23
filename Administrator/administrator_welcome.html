@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+	<head>
+  		<meta charset="utf-8" />
+  		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  		<title>Welcome</title>
+  		<link rel="stylesheet" href="../css/foundation.css"/>
+  		<script src="../js/vendor/modernizr.js"></script>
+        <script src="../js/vendor/jquery.js"></script>
+	 	<script src="../js/moment.min.js"></script>
+	 	<link rel='stylesheet' href='../fullcalendar-2.3.2/fullcalendar.css' />
+		<script src='../fullcalendar-2.3.2/fullcalendar.js'></script>
+		<script>
+			$(document).ready(function() {
+			    // page is now ready, initialize the calendar...
+			    $('#calendar').fullCalendar({
+				dayClick: function() {
+				        alert('a day has been clicked!');
+				    }			    })
+			});
+		</script>
+	</head>
+   	<body>
+	   	<div class="row">
+	   		<h1>Welcome!</h1>
+	   	</div>
+	   	<div class="row">
+	 		<div class="large-4 medium-4 small-4 columns">
+				<h4>Student Questions</h4>
+	   			<div class="panel callout radius">
+	   				<strong>15 Questions Awaiting Approval!</strong><br><br>
+		   			<table> 
+		   				<tr>
+		   					<td><a href="#">BIO 1144</a></td>
+		   					<td><a href="#" class="button tiny alert round">4</a></td>
+		   				</tr>
+		   				<tr>
+		   					<td><a href="#">BIO 4499</a></td>
+		   					<td><a href="#" class="button tiny alert round">10</a></td>
+						</tr>
+						<tr>
+		   					<td><a href="#">PHYS 9999</a></td>
+		   					<td><a href="#" class="button tiny alert round">1</a></td>
+						</tr>
+					</table>
+	  			</div>
+			</div>
+			<div class="large-4 medium-4 small-4 columns right">
+				<h4>Upcoming Module Releases</h4>
+	   			<div id='calendar'></div>
+			</div>
+		</div>
+			<div class="row">
+				<h4>My Surveys</h4>
+				<table> 
+					<tr>
+						<th>Survey Name</th>
+						<th>Course</th>
+						<th>Most Recent Submission</th>
+						<th></th>
+						<th>Students Completed</th>
+					</tr>
+					<tr>
+						<td>Instructor Survey</td>
+						<td><a href="#">BIO 1144</a></td>
+						<td>14 Sep, 2:05 AM</td>
+						<td></td>
+						<td>12/18</td>
+					</tr>
+					<tr>
+						<td>Midterm Questionanire</td>
+						<td><a href="#">PHYS 9999</a></td>
+						<td>11 Sep, 12:03 PM</td>
+						<td></td>
+						<td>36/38</td>
+					</tr>
+				<tr>
+						<td>End of Course Thoughts</td>
+						<td><a href="#">BIO 4480</a></td>
+						<td>9 Aug, 10:04 AM</td>
+						<td></td>
+						<td>4/4</td>
+					</tr>
+				</table>
+			</div>
+			<div class="row">
+				<h4>My Evaluations</h4>
+				<table> 
+					<tr>
+						<th>Survey Name</th>
+						<th>Course</th>
+						<th>Average Score</th>
+						<th></th>
+						<th>Students Completed</th>
+					</tr>
+	   				<tr>
+	   					<td>Cell Membranes</td>
+	   					<td><a href="#">BIO 1144</a></td>
+	   					<td>85/100</td>
+	   					<td></td>
+	   					<td>12/18</td>
+	   				</tr>
+	   				<tr>
+	   					<td>Linear Motion</td>
+	   					<td><a href="#">PHYS 9999</a></td>
+	   					<td>67/100</td>
+	   					<td></td>
+	   					<td>36/38</td>
+	   				</tr>
+					<tr>
+	   					<td>Plant Toxins</td>
+	   					<td><a href="#">BIO 4480</a></td>
+	   					<td>76/100</td>
+	   					<td></td>
+	   					<td>4/4</td>
+	   				</tr>
+				</table>
+			</div>
+		</div>
+   </body>
+</html>
