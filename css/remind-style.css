@@ -1,7 +1,13 @@
 .semiround {
 	border-radius: 7px;
 }
+<<<<<<< Updated upstream
 
 .full-width {
 	width: 100%;
+=======
+.circle-div {
+	border-radius: 100%;
+
+>>>>>>> Stashed changes
 }
