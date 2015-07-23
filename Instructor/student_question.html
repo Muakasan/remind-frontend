@@ -12,18 +12,77 @@
     </head>
     <body>
         <div class="row">
-            <div class="large-11 columns">
-                <ul class="tabs vertical" data-tab>
-                    <li class="tab-title active"><a href="#panel11">Walt Whitman<div class=" tiny button round disabled">7</div></a></li>
-                    <li class="tab-title"><a href="#panel21">Tab 2</a></li>
-                    <li class="tab-title"><a href="#panel31">Tab 3</a></li>
-                    <li class="tab-title"><a href="#panel41">Tab 4</a></li>
+            <div class="large-12 medium-12 small-12 columns">
+                <h1>Econ</h1>
+                <h4>George Washington University</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="large-4 columns">
+                <ul class="tabs vertical" style="max-width:100%;width:100%;" data-tab>
+                    <li class="tab-title active" >
+                        <a href="#panel11">
+                            Walt Whitman
+                            <div class=" tiny button right round disabled">7</div>
+                        </a>
+                    </li>
+                    <li class="tab-title">
+                        <a href="#panel21">
+                            Bill Nye
+                            <div class=" tiny button right round disabled">2</div>
+                        </a>
+                    </li>
+                    <li class="tab-title">
+                        <a href="#panel31">
+                            Herp Derp
+                            <div class=" tiny button right round disabled">6</div>
+                        </a>
+                    </li>
+                    <li class="tab-title">
+                        <a href="#panel41">
+                            Darth Vader
+                            <div class=" tiny button right round disabled">4</div>
+                        </a>
+                    </li>
                 </ul>
-                </div>
-                <div class="large-1 columns">
+            </div>
+            <div class="large-8 columns">
                 <div class="tabs-content">
                     <div class="content active" id="panel11">
-                        <p>This is the first panel of the basic tab example. You can place all sorts of content here including a grid.</p>
+                        <ul class="accordion" data-accordion>
+                            <li class="accordion-navigation">
+                                <a href="#panel1a">Multiple Choice</a>
+                                <div id="panel1a" class="content active">
+                                    <div class="large-7 medium-7 small-7 columns">
+                                    Prompt
+                                    </div>
+                                    <div class="large-2 medium-2 small-2 columns">
+                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
+                                    </div>  
+                                    <div class="large-2 medium-2 small-2 columns">
+                                    <a href="#" class="button tiny semiround right">Approve</a>
+                                    </div>
+                                    <textarea readonly>Which color has the highest wavelength?</textarea>
+                                    <div> 
+                                    Choices<br>
+                                        <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
+                                        <input type="radio" disabled name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-navigation">
+                                <a href="#panel2a">Accordion 2</a>
+                                <div id="panel2a" class="content">
+                                    Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+                            </li>
+                            <li class="accordion-navigation">
+                                <a href="#panel3a">Accordion 3</a>
+                                <div id="panel3a" class="content">
+                                    Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <div class="content" id="panel21">
                         <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
@@ -35,18 +94,11 @@
                         <p>This is the fourth panel of the basic tab example. This is the fourth panel of the basic tab example.</p>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
         </div>
     </body>
     <script>
         $(document).foundation();
-        
-        jQuery(document).ready(function(){
-        $('.accordion .head').click(function() {
-        $(this).next().toggle('slow');
-        return false;
-        }).next().hide();
-        });
     </script>
 </html>
