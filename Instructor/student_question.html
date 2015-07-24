@@ -55,13 +55,11 @@
                                 <div id="panel1a" class="content active">
                                     <div class="large-7 medium-7 small-7 columns">
                                     Prompt
-                                    </div> 
-                                    <div class="large-2 medium-2 small-2 columns">
-                                    <a href="#" class="button tiny semiround right">Approve</a>
                                     </div>
-                                    <div class="large-2 medium-2 small-2 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    </div> 
+                                    <div class="large-5 medium-5 small-5 columns">
+                                        <a href="#" class="button tiny semiround alert right">Reject</a>
+                                        <a href="#" class="button tiny semiround right">Approve</a>
+                                        </div> 
                                     <textarea readonly>Which color has the highest wavelength?</textarea>
                                     <div> 
                                     Choices<br>
@@ -71,18 +69,102 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel2a">Accordion 2</a>
+                                <a href="#panel2a">Matching<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Match the president to thier dog</label></a>
                                 <div id="panel2a" class="content">
-                                    Panel 2. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    <div class="row">
+                                       <div class="large-7 medium-7 small-7 columns">
+                                        Matching
+                                        </div> 
+                                        <div class="large-5 medium-5 small-5 columns">
+                                            <a href="#" class="button tiny semiround alert right">Reject</a> 
+                                            <a href="#" class="button tiny semiround right">Approve</a>
+                                        </div> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-2 medium-2 small-2 columns">
+                                        <input type="text" class="value" maxlength="2" size="2">
+                                        </div>
+                                        <div class="large-4 medium-4 small-4 columns">
+                                        <h5>George Washington</h5>
+                                        </div>
+                                        <div class="large-6 medium-6 small-6 columns">
+                                        <a class="button tiny semiround success left">a</a>
+                                        <h5>&nbsp;Sweet Lips</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-2 medium-2 small-2 columns">
+                                        <input type="text" class="value" maxlength="2" size="2">
+                                        </div>
+                                        <div class="large-4 medium-4 small-4 columns">
+                                        <h5>John Appleseed</h5>
+                                        </div>
+                                        <div class="large-6 medium-6 small-6 columns">
+                                        <a class="button tiny semiround success left">b</a>
+                                        <h5>&nbsp;Juno</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-2 medium-2 small-2 columns">
+                                        <input type="text" class="value" maxlength="2" size="2">
+                                        </div>
+                                        <div class="large-4 medium-4 small-4 columns">
+                                        <h5>Dick Grayson</h5>
+                                        </div>
+                                        <div class="large-6 medium-6 small-6 columns">
+                                        <a class="button tiny semiround success left">c</a>
+                                        <h5>&nbsp;Juno</h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel3a">Accordion 3</a>
+                                <a href="#panel3a">Free Response<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Where is the Great Pyramid?</label></a>
                                 <div id="panel3a" class="content">
-                                    Panel 3. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    <div class="large-7 medium-7 small-7 columns">
+                                    <strong>Prompt:</strong>
+                                    </div> 
+                                    <div class="large-5 medium-5 small-5 columns">
+                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
+                                    <a href="#" class="button tiny semiround right">Approve</a>
+                                    </div> 
+                                    <textarea readonly>Where is the Great Pyramid?</textarea>
+                                    <div> 
+                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                        <textarea readonly>Giza</textarea>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-navigation">
+                                <a href="#panel4a">Fill in The Blank<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Please expand to view question</label></a>
+                                <div id="panel4a" class="content">
+                                    <div class="large-7 medium-7 small-7 columns">
+                                    <strong>Prompt:</strong>
+                                    </div> 
+                                    <div class="large-5 medium-5 small-5 columns">
+                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
+                                    <a href="#" class="button tiny semiround right">Approve</a>
+                                    </div> 
+                                    <div class="large-12 coulumns">
+                                    Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
+
+
+
+                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                                              <li><a href="#"> Lee Harvey Oswald</a></li>
+                                              <li><a href="#">Donky Kong</a></li>
+                                              <li><a href="#">Elsbeth</a></li>
+                                            </ul>
+                                        <ul id="hover2" class="f-dropdown" data-dropdown-content>
+                                            <li><a href="#">Barney Regime</a></li>
+                                            <li><a href="#">Cold War</a></li>
+                                            <li><a href="#">Macintosh and Window war</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
+
                     </div>
                     <div class="content" id="panel21">
                         <p>This is the second panel of the basic tab example. This is the second panel of the basic tab example.</p>
