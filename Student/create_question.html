@@ -1,3 +1,4 @@
+<!--read only will diable the tagging system as there is no data-->
 <!DOCTYPE HTML>
 <html class="no-js" lang="en">
     <head>
@@ -19,14 +20,13 @@
                 $("#myTags,#myTags2,#myTags3,#myTags4").tagit({
                     placeholderText: "Search...",
                     caseSensitive: false,
-                    readOnly: true  
                 });
 
             });
         </script>
     </head>
     <body>
-        <nav class="top-bar" data-topbar role="navigation">
+         <nav class="top-bar" data-topbar role="navigation">
             <ul class="title-area">
                 <li class="name">
                     <h1><a href="#">Remind</a></h1>
@@ -39,15 +39,152 @@
                 </ul>
             </section>
         </nav>
-        <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
-            <ul id="drop1" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
-                <li><a href="#">Multiple Choice</a></li>
-                <li><a href="#">Free Response</a></li>
-                <li><a href="#">Fill The Blanks</a></li>
-                <li><a href="#">Matching</a></li>
-            </ul>
+        <div class="row">
+            <div class="large-12 medium-12 small-12 columns">
+                <h1 class="text-center">New Question</h1>
+            </div>
+        </div>
+        <div class="row">
+                <div class="text-center">
+                    <button id="drop_btn" href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
+                </div>
+                <!--anchor tags are used simply for styling-->
+                <ul id="drop1" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
+                    <li id="opt1"><a>Multiple Choice</a></li>
+                    <li id="opt2"><a>Free Response</a></li>
+                    <li id="opt3"><a>Fill The Blank</a></li>
+                    <li id="opt4"><a>Matching</a></li>
+                </ul>
+        </div>
+        <div class="row">
+            <h4>Prompt:</h4>
+            <textarea></textarea>
+        </div>
+        <div class="row text-center">
+            <h4>Content: </h4>
+            <a class="button semiround">Add Content</a>
+        </div>
+        <div class="row">
+            <div id="grp1" class="group">
+                <div> 
+                    Choices<br>
+                    <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
+                    <input type="radio" name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
+                    <input type="text" placeholder="New Choice">
+                    <div class="text-center">
+                        <a class="button success semiround small">Add Choice</a>
+                    </div>
+                    <strong>Tags:</strong>    
+                    <ul id="myTags">
+                    </ul>
+                </div>
+            </div>
+            <div id="grp2" class="group">
+                <div> 
+                <strong>Answer:</strong><br>
+                    <textarea placeholder="Answer"></textarea>
+                </div>
+                <br>
+                <strong>Tags:</strong>    
+                <ul id="myTags2"></ul>
+            </div>
+            <div id="grp3" class="group">
+                <p>
+                Kennedy was alledgedly killed by&nbsp;<a href="#" class="info tiny button semiround" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>&nbsp;. Kennedy was known to be in charge of the US during the&nbsp;<a href="#" class="info tiny button semiround" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a>&nbsp;era.
+                </p>
+                    <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                          <li><a href="#">Lee Harvey Oswald</a></li>
+                          <li><a href="#">Donky Kong</a></li>
+                          <li><a href="#">Elsbeth</a></li>
+                        </ul>
+                    <ul id="hover2" class="f-dropdown" data-dropdown-content>
+                        <li><a href="#">Barney Regime</a></li>
+                        <li><a href="#">Cold War</a></li>
+                        <li><a href="#">Macintosh and Window war</a></li>
+                    </ul>
+                <textarea></textarea>
+                <strong>Tags:</strong>    
+                <ul id="myTags3"></ul>
+            </div>
+            <div id="grp4" class="group">
+                <div class="row">
+                    <div class="large-2 medium-2 small-2 columns">
+                        <input type="text" class="value" maxlength="2" size="2" value="a">
+                    </div>
+                    <div class="large-4 medium-4 small-4 columns">
+                        <h5>George Washington</h5>
+                    </div>
+                    <div class="large-6 medium-6 small-6 columns">
+                        <a class="button tiny semiround success left">a</a>
+                        <h5>&nbsp;Sweet Lips</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-2 medium-2 small-2 columns">
+                        <input type="text" class="value" maxlength="2" size="2" value="b">
+                    </div>
+                    <div class="large-4 medium-4 small-4 columns">
+                        <h5>John Appleseed</h5>
+                    </div>
+                    <div class="large-6 medium-6 small-6 columns">
+                        <a class="button tiny semiround success left">b</a>
+                        <h5>&nbsp;Ace</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-2 medium-2 small-2 columns">
+                        <input type="text" class="value" maxlength="2" size="2" value="c">
+                    </div>
+                    <div class="large-4 medium-4 small-4 columns">
+                        <h5>Dick Grayson</h5>
+                    </div>
+                    <div class="large-6 medium-6 small-6 columns">
+                        <a class="button tiny semiround success left">c</a>
+                        <h5>&nbsp;Juno</h5>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-2 medium-2 small-2 columns">
+                        <input type="text" class="value" maxlength="2" size="2" value="">
+                    </div>
+                    <div class="large-4 medium-4 small-4 columns">
+                        <h5>Dick Grayson</h5>
+                    </div>
+                    <div class="large-6 medium-6 small-6 columns">
+                        <a class="button tiny semiround success left">c</a>
+                        <h5>&nbsp;Juno</h5>
+                    </div>
+                </div>
+                <strong>Tags:</strong>
+                <ul id="myTags4"></ul>
+            </div>
+        </div>
+        <div class="row text-center">
+            <a class="button success semiround">Submit for Approval</a>
+        </div>
     </body>
-        <script>
-            $(document).foundation();
-        </script>
+    <script>
+        $(document).foundation();
+        $('.group').hide();
+        $('#opt1').click(function () {
+            $('#drop_btn').html('Multiple Choice');
+            $('.group').hide();
+            $('#grp1').show();
+     });
+        $('#opt2').click(function () {
+            $('#drop_btn').html('Free Response');
+            $('.group').hide();
+            $('#grp2').show();
+     });
+        $('#opt3').click(function () {
+            $('#drop_btn').html('Fill in the Blank');
+            $('.group').hide();
+            $('#grp3').show();
+     });
+        $('#opt4').click(function () {
+            $('#drop_btn').html('Matching');
+            $('.group').hide();
+            $('#grp4').show();
+     });
+    </script>
 </html>
