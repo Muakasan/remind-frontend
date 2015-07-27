@@ -1,9 +1,10 @@
+<!--read only will diable the tagging system as there is no data-->
 <!DOCTYPE HTML>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Search Module</title>
+        <title>Remind | Student Question</title>
         <link rel="stylesheet" href="../css/foundation.css"/>
         <link rel="stylesheet" href="../css/remind-style.css">
         <link rel="stylesheet" href="../css/remind-style.css" />
@@ -18,7 +19,8 @@
             $(document).ready(function() {
                 $("#myTags,#myTags2,#myTags3,#myTags4").tagit({
                     placeholderText: "Search...",
-                    caseSensitive: false
+                    caseSensitive: false,
+                    readOnly: true
                 });
 
             });
@@ -569,7 +571,6 @@
                     </div>
                 </div>
             </div>
-        </div>
         </div>
     </body>
     <script>

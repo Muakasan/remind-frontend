@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Remind | Student Question</title>
+        <link rel="stylesheet" href="../css/foundation.css"/>
+        <link rel="stylesheet" href="../css/remind-style.css">
+        <link rel="stylesheet" href="../css/remind-style.css" />
+        <script src="../js/vendor/modernizr.js"></script>
+        <script src="../js/vendor/jquery.js"></script>
+        <script src="../js/foundation.min.js"></script>
+        <script src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+        <script src="../tag-it-master/js/tag-it.js"></script>
+        <link rel="stylesheet" href="../jquery-ui-1.11.4.custom/jquery-ui.css" />
+        <link rel="stylesheet" href="../tag-it-master/css/jquery.tagit.css"/>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#myTags,#myTags2,#myTags3,#myTags4").tagit({
+                    placeholderText: "Search...",
+                    caseSensitive: false,
+                    readOnly: true  
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="#">Remind</a></h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li><a href="student_courses.html">My Courses</a></li>
+                    <li><a href="#">Me</a></li>
+                </ul>
+            </section>
+        </nav>
+        <button href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
+            <ul id="drop1" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
+                <li><a href="#">Multiple Choice</a></li>
+                <li><a href="#">Free Response</a></li>
+                <li><a href="#">Fill The Blanks</a></li>
+                <li><a href="#">Matching</a></li>
+            </ul>
+    </body>
+        <script>
+            $(document).foundation();
+        </script>
+</html>
