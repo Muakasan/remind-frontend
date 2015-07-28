@@ -66,11 +66,9 @@
             <div id="grp1" class="group">
                 <div> 
                     Choices<br>
-                    <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
-                    <input type="radio" name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
-                    <input type="text" placeholder="New Choice">
+                    <input id="mc_input" type="text" placeholder="New Choice">
                     <div class="text-center">
-                        <a class="button success semiround small">Add Choice</a>
+                        <a id="mc_add_choice_btn" class="button success semiround small">Add Choice</a>
                     </div>
                     <strong>Tags:</strong>    
                     <ul id="myTags">
@@ -96,11 +94,18 @@
                     </div>
                 </div>
                 <div id="ftb_div_2">
-                    <div id="ftb_text">
-                    </div><br><br>
-                    <strong>Tags:</strong>    
-                    <ul id="myTags3"></ul>
+                    <div class="row">
+                        <div class="small-8 medium-8 large-8 columns">
+                            <div class="panel callout semiround" id="ftb_text">
+                            </div>
+                        </div>
+                        <a id="ftb_clear" class="button semiround alert small">Clear</a>
+                    </div>
+                    <div id="ftb_div_content">
+                    </div>
                 </div>
+                <strong>Tags:</strong>    
+                <ul id="myTags3"></ul>
             </div>
             <div id="grp4" class="group">
                 <div class="row">
@@ -126,6 +131,7 @@
     <script>
         $(document).foundation();
         $('.group').hide();
+        //Choose Question Type Dropdown
         $('#opt1').click(function () {
             $('#drop_btn').html('Multiple Choice');
             $('.group').hide();
@@ -146,7 +152,7 @@
             $('.group').hide();
             $('#grp4').show();
      });
-
+    //Fill in the Blank
     var wrapwords = function() {
     $('#ftb_text').each(function() {
         $(this).html($(this).text().replace(/\b(\w+)\b/g, "<span>$1</span>"));
@@ -156,8 +162,20 @@
         if(!$(this).hasClass('info')){
             $(this).addClass('info label semiround');
             //$(this).text(count+'. '+$(this).text());
-            //$('#word').text($(this).text()); 
-            count++;}
+            var new_blank_row = "<div class='row'> \
+                                    <h4>"+$(this).text()+"</h4> \
+                                    <h6>Distractors</h6> \
+                                    <div class='small-12 medium-12 large-12 columns'> \
+                                        <a id=ftb_distractor_"+count+" class='button semiround'>Add a Distractor</a> \
+                                    </div> \
+                                </div>"
+            $('#ftb_div_content').append(new_blank_row);
+            $(document).on('click', '#ftb_distractor_'+count, function(){
+            $(this).before('<input type="text"></input>');
+            $(this).prev().addClass($(this).attr('id')+'_input');
+            });
+            count++;
+        }
         });
     }
     $('#ftb_div_2').hide();
@@ -166,8 +184,25 @@
         $('#ftb_text').text($('#ftb_textarea').val());
         $('#ftb_div_2').show();
         wrapwords();
-    })
+    });
 
+    $('#ftb_clear').click(function(){
+        $('#ftb_div_content').html('');
+        $('#ftb_div_2').hide();
+        $('#ftb_div_1').show();
+        count=1;
+    });
+    //Multiple Choice
+    $('#mc_add_choice_btn').click(function(){
+        var new_mc_option_rad = '<input type="radio" name="mc_opt" class="mc_option">';
+        $('#mc_input').before(new_mc_option_rad);
+        var mc_input_text = $('#mc_input').val();
+        $('#mc_input').prev().val(mc_input_text);
+        var new_mc_option_lab = '<label>'+ mc_input_text +'</label><br>';
+        $('#mc_input').before(new_mc_option_lab);
+        $('#mc_input').val('');        
+        //$(this).prev().val($('#mc_input').text());
+    })
 
     </script>
 </html>
