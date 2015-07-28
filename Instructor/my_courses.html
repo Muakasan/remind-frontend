@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Manage Courses</title>
+        <title>My Courses | Remind</title>
         <link rel="stylesheet" href="../css/foundation.css" />
         <link rel="stylesheet" href="../css/remind-style.css" />
         <script src="../js/vendor/modernizr.js"></script>
@@ -37,53 +37,119 @@
             </div>
         </div>
         <div class="row">
-            <div class="large-12 medium-12 small-12 columns">
-                <div class="panel">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th width="200">Instructor Name</th>
-                                <th>Course Name</th>
-                                <th width="150">Students</th>
-                                <th width="150">Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#">John Boo</a></td>
-                                <td><a href="#">Math 302</a></td>
-                                <td>12</td>
-                                <td>15 Sep, 7:12 AM(2013)</td>
-                                <td><a href="#" class="button small semiround">Edit</a>
-                                    <a href="#" class="button small semiround alert">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">John Boo</a></td>
-                                <td><a href="#">CSCI 6609</a></td>
-                                <td>12</td>
-                                <td>15 Sep, 7:12 AM(2013)</td>
-                                <td><a href="#" class="button small semiround">Edit</a>
-                                    <a href="#" class="button small semiround alert">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><a href="#">Mary Brown</a> </td>
-                                <td><a href="#">Math 101</a></td>
-                                <td>12</td>
-                                <td>15 Sep, 7:12 AM(2013)</td>
-                                <td><a href="#" class="button small semiround">Edit</a>
-                                    <a href="#" class="button small semiround alert">Delete</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <ul class="tabs" data-tab>
+                <li class="tab-title active">
+                    <a href="#panel1">
+                        Active
+                    </a>
+                </li>
+                <li class="tab-title">
+                    <a href="#panel2">
+                        Archived
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="tabs-content">
+            <div class="content active" id="panel1">
+                <div class="row">
+                    <div class="large-12 medium-12 small-12 columns">
+                        <div class="panel">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Course Name</th>
+                                        <th width="150">Students</th>
+                                        <th width="150"> Start Date</th>
+                                        <th width="150"> End Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="#">Math 302</a></td>
+                                        <td>12</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td><a href="#" class="button small semiround">Edit</a>
+                                            <a href="#" class="button small semiround alert">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CSCI 6609</a></td>
+                                        <td>12</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td><a href="#" class="button small semiround">Edit</a>
+                                            <a href="#" class="button small semiround alert">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">Math 101</a></td>
+                                        <td>12</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td><a href="#" class="button small semiround">Edit</a>
+                                            <a href="#" class="button small semiround alert">Delete</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content" id="panel2">
+                <div class="row">
+                    <div class="large-12 medium-12 small-12 columns">
+                        <div class="panel">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Course Name</th>
+                                        <th width="150">Students</th>
+                                        <th width="150">Start Date</th>
+                                        <th width="150">End Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><a href="#">Math 302</a></td>
+                                        <td>12</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td><a href="#" class="button small semiround">Edit</a>
+                                            <a href="#" class="button small semiround alert">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">CSCI 6609</a></td>
+                                        <td>12</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td><a href="#" class="button small semiround">Edit</a>
+                                            <a href="#" class="button small semiround alert">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#">Math 101</a></td>
+                                        <td>12</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td>15 Sep, 7:12 AM(2013)</td>
+                                        <td><a href="#" class="button small semiround">Edit</a>
+                                            <a href="#" class="button small semiround alert">Delete</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <script src="js/vendor/jquery.js"></script>
-        <script src="js/foundation.min.js"></script>
+        <script src="../js/vendor/jquery.js"></script>
+        <script src="../js/foundation.min.js"></script>
         <script>
             $(document).foundation();
         </script>

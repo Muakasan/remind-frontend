@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/foundation.css"/>
+    <link rel="stylesheet" href="../css/remind-style.css">
+	<link
+	</head>
+	<body>
+	<!--http://jsfiddle.net/grantgibson/4FVX6/1/-->
+		<div id="matching_text">
+		    Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend eros ut mi laoreet aliquam. Nullam hendrerit id sapien eu convallis. Pellentesque in laoreet elit, eget vulputate tellus. Fusce eget tortor tortor. Duis scelerisque eleifend sollicitudin. Nullam et nunc posuere, lacinia nulla a, feugiat sapien. Fusce lacinia lacus sem, at ultricies libero auctor eget. Etiam id arcu neque. Nam metus dolor, luctus sed ultricies vitae, convallis vel eros. Proin ligula tellus, bibendum vitae varius vel, porttitor sed nunc.
+		</div>
+		Current word: <span id="word"></span>
+	<script>
+		var wrapwords = function() {
+	    $('#matching_text').each(function() {
+	        $(this).html($(this).text().replace(/\b(\w+)\b/g, "<span>$1</span>"));
+	    });
+	    var count = 1;
+        $(document).on('click', '#matching_text span', function(){
+        	if(!$(this).hasClass('info')){
+		    	$(this).addClass('info label semiround');
+		    	$(this).text(count+'. '+$(this).text());
+		        $('#word').text($(this).text()); 
+	    		count++;}
+    		});
+		}
+		wrapwords();
+	</script>
+	</body>
+</html>
