@@ -27,3 +27,10 @@
 .same-line {
 	display: inline;
 }
+.reveal-modal .close-reveal-modal-button{
+    cursor: pointer;
+    font-size: 2.5rem;
+    font-weight: bold;
+    line-height: 1;
+    position: absolute
+     }

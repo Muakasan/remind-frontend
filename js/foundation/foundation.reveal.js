@@ -13,7 +13,7 @@
       animation_speed : 250,
       close_on_background_click : true,
       close_on_esc : true,
-      dismiss_modal_class : 'close-reveal-modal',
+      dismiss_modal_class : 'close-reveal-modal'
       multiple_opened : false,
       bg_class : 'reveal-modal-bg',
       root_element : 'body',

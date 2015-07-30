@@ -25,10 +25,27 @@
         </script>
     </head>
     <body>
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="#">Remind</a></h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li><a href="#">Manage Courses</a></li>
+                    <li><a href="#">My Courses</a></li>
+                    <li><a href="#">Manage Instructors</a></li>
+                    <li><a href="#">Manage Students</a></li>
+                    <li><a href="#">Me</a></li>
+                </ul>
+            </section>
+        </nav>
         <div class="row">
-            
+            <div class="12-large columns">
+                <h1>Module 3</h1>
+            </div>
         </div>
-        <div class="row">
             <div class="text-center">
                 <button id="drop_btn" href="#" data-dropdown="drop1" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
                     <ul id="drop1" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
@@ -41,12 +58,183 @@
                 <a href="#" data-reveal-id="firstModal" class="button semiround small">Search</a>
                     <div id="firstModal" class="reveal-modal" data-reveal aria-labelledby="firstModalTitle" aria-hidden="true" role="dialog">
                       <h2 id="firstModalTitle">Search</h2>
-                      <div class="row">
-                        <div class="large-7 medium-7 small-7columns">
-                          <p>Prompt<input type="text" placeholder="Enter a previous prompt"></p>
+                        <div>
+                            <ul class="inline-list">
+                                <li>Prompt</li>
+                                <li><a><input type="text" placeholder="Enter a previous prompt"></a></li>
+                            </ul>
+                            <ul class="inline-list">
+                                <li>Tags</li>
+                                <li><ul id="myTags"></ul></li>
+                            </ul>
+                            <ul class="inline-list">
+                                <li>Question Type</li>
+                                <li> 
+                                <button id="drop_btn" href="#" data-dropdown="drop2" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
+                                    <ul id="drop2" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
+                                        <li>Multiple Choice</li>
+                                        <li>Free Response</li>
+                                        <li>Matching</li>
+                                        <li>Fill in the Blank</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="inline-list">
+                                <li>Institution</li>
+                                <li>
+                                <button id="drop_btn" href="#" data-dropdown="drop3" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
+                                    <ul id="drop3" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
+                                        <li>Boba Fett Academy of Arts</li>
+                                        <li>Stromtroopers Academy of never hitting your target</li>
+                                        <li>GWU</li>
+                                        <li>Idaho</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="inline-list">
+                                <li>Instructor</li>
+                                <li>
+                                <button id="drop_btn" href="#" data-dropdown="drop4" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
+                                    <ul id="drop4" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
+                                        <li>Boba Fett</li>
+                                        <li>CT-7567</li>
+                                        <li>Jennifer Hill</li>
+                                        <li>Idahoians</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="inline-list">
+                                <li>Course</li>
+                                <li>
+                                    <button id="drop_btn" href="#" data-dropdown="drop5" aria-controls="drop1" aria-expanded="false" class="button dropdown small semiround">{Type}</button>
+                                    <ul id="drop5" data-dropdown-content class="f-dropdown semiround info" aria-hidden="true">
+                                        <li>Flight</li>
+                                        <li>order 66</li>
+                                        <li>Cs</li>
+                                        <li>Idahoians</li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
+                        <a class="close-reveal-modal" >×</a>
                     </div>
-            </div>
+                </div> 
+                <div class="row">
+                    <div class="12-large columns">
+                        <div class="text-center">
+                            <h3>Current Module Questions</h3>
+                        </div>
+                        <ul class="accordion" data-accordion>
+                            <li class="accordion-navigation">
+                                <a href="#panel1a">Multiple Choice<div class="button right semiround alert tiny">Delete</div><div class="button right semiround tiny">Edit</div><label>Which color has the highest wavelength?</label></a>
+                                <div id="panel1a" class="content active">
+                                    <div class="large-7 medium-7 small-7 columns">
+                                    Prompt
+                                    </div>
+                                    <textarea readonly>Which color has the highest wavelength?</textarea>
+                                    <div> 
+                                    Choices<br>
+                                        <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
+                                        <input type="radio" disabled name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
+                                        <br>
+                                        Tags    
+                                        <ul id="myTags"></ul>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-navigation">
+                                <a href="#panel2a">Matching<div class="button right semiround alert tiny">Delete</div><div class="button right semiround tiny">Edit</div><label>Match the president to thier dog</label></a>
+                                <div id="panel2a" class="content">
+                                    <div class="row">
+                                       <div class="large-7 medium-7 small-7 columns">
+                                        Matching
+                                        </div> 
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-2 medium-2 small-2 columns">
+                                        <input type="text" class="value" maxlength="2" size="2">
+                                        </div>
+                                        <div class="large-4 medium-4 small-4 columns">
+                                        <h5>George Washington</h5>
+                                        </div>
+                                        <div class="large-6 medium-6 small-6 columns">
+                                        <a class="button tiny semiround success left">a</a>
+                                        <h5>&nbsp;Sweet Lips</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-2 medium-2 small-2 columns">
+                                        <input type="text" class="value" maxlength="2" size="2">
+                                        </div>
+                                        <div class="large-4 medium-4 small-4 columns">
+                                        <h5>John Appleseed</h5>
+                                        </div>
+                                        <div class="large-6 medium-6 small-6 columns">
+                                        <a class="button tiny semiround success left">b</a>
+                                        <h5>&nbsp;Ace</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-2 medium-2 small-2 columns">
+                                        <input type="text" class="value" maxlength="2" size="2">
+                                        </div>
+                                        <div class="large-4 medium-4 small-4 columns">
+                                        <h5>Dick Grayson</h5>
+                                        </div>
+                                        <div class="large-6 medium-6 small-6 columns">
+                                        <a class="button tiny semiround success left">c</a>
+                                        <h5>&nbsp;Juno</h5>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    Tags    
+                                    <ul id="myTags2"></ul>
+                                </div>
+                            </li>
+                            <li class="accordion-navigation">
+                                <a href="#panel3a">Free Response<div class="button right semiround alert tiny">Delete</div><div class="button right semiround tiny">Edit</div><label>Where is the Great Pyramid?</label></a>
+                                <div id="panel3a" class="content">
+                                    <div class="large-7 medium-7 small-7 columns">
+                                    <strong>Prompt:</strong>
+                                    </div> 
+                                    <textarea readonly>Where is the Great Pyramid?</textarea>
+                                    <div> 
+                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                        <textarea readonly>Giza</textarea>
+                                    </div>
+                                    <br>
+                                    Tags    
+                                    <ul id="myTags3"></ul>
+                                </div>
+                            </li>
+                            <li class="accordion-navigation">
+                                <a href="#panel4a">Fill in The Blank<div class="button right semiround alert tiny">Delete</div><div class="button right semiround tiny">Edit</div><label>Please expand to view question</label></a>
+                                <div id="panel4a" class="content">
+                                    <div class="large-7 medium-7 small-7 columns">
+                                    <strong>Prompt:</strong>
+                                    </div>
+                                    <div class="large-12 coulumns">
+                                    Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
+                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                                              <li><a href="#"> Lee Harvey Oswald</a></li>
+                                              <li><a href="#">Donky Kong</a></li>
+                                              <li><a href="#">Elsbeth</a></li>
+                                            </ul>
+                                        <ul id="hover2" class="f-dropdown" data-dropdown-content>
+                                            <li><a href="#">Barney Regime</a></li>
+                                            <li><a href="#">Cold War</a></li>
+                                            <li><a href="#">Macintosh and Window war</a></li>
+                                        </ul>
+                                    </div>
+                                    <br>
+                                    Tags    
+                                    <ul id="myTags4"></ul>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
     </body>
      <script>
         $(document).foundation();
