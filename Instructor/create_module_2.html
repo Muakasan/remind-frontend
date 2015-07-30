@@ -104,28 +104,32 @@
                                 $("<li>").append(
                                     $("<a>", {
                                         "href": "#",
-                                        "text": "Multiple Choice"
+                                        "text": "Multiple Choice",
+                                        "class": "question-type-option"
                                         })),
                                 $("<li>").append(
                                     $("<a>", {
                                         "href": "#",
-                                        "text": "Free Response"
+                                        "text": "Free Response",
+                                        "class": "question-type-option"
                                         })),
                                 $("<li>").append(
                                     $("<a>", {
                                         "href": "#",
-                                        "text": "Fill in the Blank"
+                                        "text": "Fill in the Blank",
+                                        "class": "question-type-option"
                                         })),
                                 $("<li>").append(
                                     $("<a>", {
                                         "href": "#",
-                                        "text": "Matching"
+                                        "text": "Matching",
+                                        "class": "question-type-option"
                                         }
                                     )
                                 )                                
                             ),
                             $("<div>", {
-                                "id": "question-div-" + count
+                                "class": "question-div"
                             }),
                             $("<ul>", {
                                 "id": "myTags-" + count
@@ -141,28 +145,27 @@
             });
 
             //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
-            $("#accordion").on("click", ".content li", function(){
-                var questionType = $(this).children().text(); //gets the text from the li that was clicked
-                $(this).parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
-                alert(getQuestionNumber(getPanel($(this))));
-                var questionNumber = $(this).parent().attr("data-question-number"); //get Question Number
-                $("#question-div-"+questionNumber).html(""); //clear whatever's inside the div
-
+            $("#accordion").on("click", ".question-type-option", function(){
+                var questionType = $(this).text(); //gets the text from the li that was clicked
+                $(this).parent().parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
+                var panel = getPanel($(this));
+                var questionDiv = panel.children(".question-div");
+                questionDiv.html("");
                 //This switch determines the question type based on the dropdown that was clicked
                 switch(questionType){ 
                     case "Multiple Choice":
                         // this will break because it just uses the count rather than checking the count for this particular dorpdown
-                        $("#question-div-" + questionNumber).append(
+                        questionDiv.append(
                             $("<p>", {"text": "Choices"}),
+                            $("<div>", {"class":"mc-rad-group"}),
                             $("<input>", {
-                                //"id": "mc-input",
                                 "type": "text",
+                                "class": "mc-add-question-input",
                                 "placeholder": "New Choice"
                             }),
                             $("<div>", {"class": "text-center"}).append(
-                                $("<a>", {
-                                    //"id": mc-add-choice-btn,                                    
-                                    "class": "button success semiround small",
+                                $("<a>", {                                    
+                                    "class": "button success semiround small mc-button",
                                     "text": "Add Choice"
                                 })
                             )
@@ -171,26 +174,98 @@
 
                     case "Free Response":
                         break;
-
+            /*<div class="row">
+                    <div class="small-6 medium-6 large-6 columns">
+                    <h4>Questions</h4>
+                    </div>
+                    <div class="small-6 medium-6 large-6 columns">
+                    <h4>Options</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="match_div_question">
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="match_div_distract" class="small-6 medium-6 large-6 columns right">
+                    <h6>Distractors</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="match_question_button" class="small-8 medium-8 large-8 columns">
+                        <a class="button semiround">Add a Question</a>
+                    </div>
+                    <div id="match_distract_button" class="small-4 medium-4 large-4 columns">
+                        <a class="button semiround">Add a Distractor</a>
+                    </div>
+                </div>
+                */
                     case "Fill in the Blank":
+                        questionDiv.append(
+                            $("<div>", {"class":"row"}).append(
+                                $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
+                                    $("<h4>", {"text": "Questions"})),
+                                $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
+                                    $("<h4>", {"text": "Options"}))
+                                ),
+                            $("<div>", {"class": "row"}).append(
+                                $("<div>", {"class": "match-question-div"})),
+                            $("<div>", {"class": "row"}).append(
+                                $("<div>", {"class": "match-distract-div small-6 medium-6 large-6 columns right"}).append(
+                                    $("<h6>", {"text" : "Distractors"})),
+                            //change this from being from clicking on div to clicking on anchor
+                            $("<div>", {"class": "row"}).append(
+                                $("<div>", {"class": "match-question-button small-8 medium-8 large-8 columns"}).append(
+                                    $("<a>", {
+                                        "class": "button semiround",
+                                        "text": "Add a Question"
+                                    })),
+                                $("<div>", {"class": "match-distract-button small-4 medium-4 large-4 columns"}).append(
+                                    $("<a>", {
+                                        "class": "button semiround",
+                                        "text": "Add a Distractor"
+                                    })))));
+
                         break;
 
                     case "Matching":
                         break;
                 }
             });
+            $("#accordion").on("click", ".mc-button", function(){
+                var panel = getPanel($(this));
+                var questionNumber = getQuestionNumber(panel);
+                var radGroup = panel.find(".mc-rad-group");
+                var addQuestionInput = panel.find(".mc-add-question-input");
+                radGroup.append(
+                    $("<input>",{
+                        "type": "radio",
+                        "name": "mc-rad-group-" + questionNumber,
+                    }),
+
+                    $("<label>", {"text": addQuestionInput.val()}),
+                    $("<br>")
+                )
+                addQuestionInput.val("");
+            });
             /*
-            $('#mc_add_choice_btn').click(function(){
-                $('#mc_input').before("<input type='radio' name='rad-group-"+count+>");
-                var mc_input_text = $('#mc_input').val();
-                $('#mc_input').prev().val(mc_input_text);
-                var new_mc_option_lab = '<label>'+ mc_input_text +'</label><br>';
-                $('#mc_input').before(new_mc_option_lab);
-                $('#mc_input').val('');        
-                //$(this).prev().val($('#mc_input').text());
+            $("#accordion").on("click", ".mc-button", function(){
+                var panel = getPanel($(this));
+                var questionNumber = getQuestionNumber(panel);
+                var radGroup = panel.find(".rad-group");
+                var addQuestionInput = panel.find(".add-question-input");
+                radGroup.append(
+                    $("<input>",{
+                        "type": "radio",
+                        "name": "rad-group-" + questionNumber,
+                    }),
+
+                    $("<label>", {"text": addQuestionInput.val()}),
+                    $("<br>")
+                )
+                addQuestionInput.val("");
             });
             */
-           // $([data-question-number])
         </script>
     </body>
 </html>
