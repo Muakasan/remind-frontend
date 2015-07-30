@@ -56,16 +56,19 @@
                 </li>
             </ul>
         </div>
+        <br><br>
         <script>
             $(document).foundation();
-            /*
-            function getQuestionNumber(my_id){
-                return my_id.substring(0, my_id.indexOf('_'));
+            
+            var getQuestionNumber = function(panel){
+                panel_id = panel.attr("id");
+                return String(panel_id.substring(panel_id.indexOf('-')+1));
             }
-            $('#add_question_btn').click(function(){
+            
+            var getPanel = function(element){
+                return element.closest("[id^='panel']");
+            }
 
-            });
-            */
             var count = 0; //count which is used to mark question number
 
             // code to create a new question by adding to the accordion
@@ -73,25 +76,7 @@
                 count++;
 
                 //add id to prompt textarea?
-                /*
-                $("#accordion").append(" \
-                    <li class='accordion-navigation'> \
-                        <a href='#panel-" + count + "'>New Question</a> \
-                        <div id='panel-" + count + "' class='content'> \
-                            <h4>Prompt:</h4> \
-                            <textarea></textarea> \
-                            <button data-dropdown='question_type_drop_"+ count+"' class='button dropdown semiround'>Question Type</button> \
-                            <ul id='question_type_drop_" + count + "' data-dropdown-content class='f-dropdown semiround' aria-hidden='true'> \
-                                    <li><a href='#'>Multiple Choice</a></li> \
-                                    <li><a href='#'>Free Response</a></li> \
-                                    <li><a href='#'>Fill in The Blank</a></li> \
-                                    <li><a href='#'>Matching</a></li> \
-                            </ul> \
-                            <div id='question-div-"+ count + "'></div> \
-                            <ul id='myTags-" + count + "'></ul> \
-                        </div> \
-                    </li>");
-                */
+                //attach a question to the accordion
                 $("#accordion").append(
                     $("<li>", {"class":"accordion-navigation"}).append(
                         $("<a>", {
@@ -104,6 +89,7 @@
                             }).append(
                             $("<h4>",{"text":"Prompt:"}),
                             $("<textarea>"),
+                            //this handles the question type dropdown menu
                             $("<button>",{
                                 "data-dropdown": "question-type-drop-" + count,
                                 "class": "button dropdown semiround",
@@ -113,7 +99,7 @@
                                 "data-dropdown-content": true,
                                 "id": "question-type-drop-" + count,
                                 "class": "f-dropdown semiround",
-                                "aria-hidden": true
+                                "aria-hidden": true,
                                 }).append(
                                 $("<li>").append(
                                     $("<a>", {
@@ -158,19 +144,29 @@
             $("#accordion").on("click", ".content li", function(){
                 var questionType = $(this).children().text(); //gets the text from the li that was clicked
                 $(this).parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
-                $("#question-div-"+count).html(""); //clear whatever's inside the div
+                alert(getQuestionNumber(getPanel($(this))));
+                var questionNumber = $(this).parent().attr("data-question-number"); //get Question Number
+                $("#question-div-"+questionNumber).html(""); //clear whatever's inside the div
 
                 //This switch determines the question type based on the dropdown that was clicked
                 switch(questionType){ 
                     case "Multiple Choice":
                         // this will break because it just uses the count rather than checking the count for this particular dorpdown
-                        $("#question-div-"+count).append(" \
-                            Choices<br> \
-                            <input id='mc_input' type='text' placeholder='New Choice'> \
-                            <div class='text-center'> \
-                                <a id='mc_add_choice_btn' class='button success semiround small'>Add Choice</a> \
-                            </div> \
-                            ");
+                        $("#question-div-" + questionNumber).append(
+                            $("<p>", {"text": "Choices"}),
+                            $("<input>", {
+                                //"id": "mc-input",
+                                "type": "text",
+                                "placeholder": "New Choice"
+                            }),
+                            $("<div>", {"class": "text-center"}).append(
+                                $("<a>", {
+                                    //"id": mc-add-choice-btn,                                    
+                                    "class": "button success semiround small",
+                                    "text": "Add Choice"
+                                })
+                            )
+                        )
                         break;
 
                     case "Free Response":
