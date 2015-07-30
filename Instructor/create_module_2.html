@@ -73,6 +73,7 @@
                 count++;
 
                 //add id to prompt textarea?
+                /*
                 $("#accordion").append(" \
                     <li class='accordion-navigation'> \
                         <a href='#panel-" + count + "'>New Question</a> \
@@ -90,7 +91,39 @@
                             <ul id='myTags-" + count + "'></ul> \
                         </div> \
                     </li>");
-
+                */
+                $("#accordion").append(
+                    $("<li>", {"class":"accordion-navigation"}).append(
+                        $("<a>", {
+                            "href": "#panel-" + count,
+                            "text": "New Question"
+                            }),
+                            $("<div>", {
+                                "id": "panel-" + count,
+                                "class": "content"
+                                }).append(
+                                    $("<h4>",{"text":"Prompt:"}),
+                                    $("<textarea>"),
+                                    $("<button>",{
+                                        "data-dropdown": "question-type-drop-" + count,
+                                        "class": "button dropdown semiround",
+                                        "text": "Question Type"
+                                        }),
+                                    $("<ul>", {
+                                        //data dropdown content?
+                                        "id": "question-type-drop-" + count,
+                                        "class": "f-dropdown semiround",
+                                        "aria-hidden": true
+                                        }).append($("<li>").append(
+                                            $("<a>"{
+                                                "href": "#",
+                                                "text": "Multiple Choice"
+                                                })
+                                        )
+                                    )
+                                )
+                    )
+                );
                 //tags are created by putting a ul in the html code with an id and then calling the following tagit code with a corresponding id 
                 $("#myTags-" + count).tagit({
                     placeholderText: "Search...",
