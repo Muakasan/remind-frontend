@@ -43,7 +43,7 @@
         <div class="row">
             <ul id="accordion" class="accordion" data-accordion>
                 <li class="accordion-navigation">
-                    <a href="#panel">Which Class has the Highest Wavelength?<label>Multiple Choice</label></a>        
+                    <a href="#panel">Which Class has the Highest Wavelength?</a>        
                     <div id="panel" class="content">
                         <button href="#" data-dropdown="question_type_drop" class="button dropdown semiround">Question Type</button>
                         <ul id="question_type_drop" data-dropdown-content class="f-dropdown semiround" aria-hidden="true">
@@ -69,26 +69,29 @@
                 return element.closest("[id^='panel']");
             }
 
+            var getPanelHeader = function (panel){
+                return panel.parent().children().first();
+            }
+
             var count = 0; //count which is used to mark question number
 
             // code to create a new question by adding to the accordion
             $("#add_question_btn").click(function(){ 
                 count++;
 
-                //add id to prompt textarea?
                 //attach a question to the accordion
                 $("#accordion").append(
                     $("<li>", {"class":"accordion-navigation"}).append(
                         $("<a>", {
                             "href": "#panel-" + count,
-                            "text": "New Question"
+                            "text": "New Question | Question Type"
                             }),
                         $("<div>", {
                             "id": "panel-" + count,
                             "class": "content"
                             }).append(
                             $("<h4>",{"text":"Prompt:"}),
-                            $("<textarea>"),
+                            $("<textarea>", {"class": "prompt"}),
                             //this handles the question type dropdown menu
                             $("<button>",{
                                 "data-dropdown": "question-type-drop-" + count,
@@ -148,13 +151,17 @@
             $("#accordion").on("click", ".question-type-option", function(){
                 var questionType = $(this).text(); //gets the text from the li that was clicked
                 $(this).parent().parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
-                var panel = getPanel($(this));
+                
+                var panel = getPanel($(this)); //gets the panel
+                var panelHeader = getPanelHeader(panel);
+                var panelHeaderText = panelHeader.text();
+                panelHeader.text(panelHeaderText.substring(0, panelHeaderText.indexOf('|')+2)+questionType); 
+                
                 var questionDiv = panel.children(".question-div");
                 questionDiv.html("");
                 //This switch determines the question type based on the dropdown that was clicked
                 switch(questionType){ 
                     case "Multiple Choice":
-                        // this will break because it just uses the count rather than checking the count for this particular dorpdown
                         questionDiv.append(
                             $("<p>", {"text": "Choices"}),
                             $("<div>", {"class":"mc-rad-group"}),
@@ -174,33 +181,11 @@
 
                     case "Free Response":
                         break;
-            /*<div class="row">
-                    <div class="small-6 medium-6 large-6 columns">
-                    <h4>Questions</h4>
-                    </div>
-                    <div class="small-6 medium-6 large-6 columns">
-                    <h4>Options</h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="match_div_question">
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="match_div_distract" class="small-6 medium-6 large-6 columns right">
-                    <h6>Distractors</h6>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="match_question_button" class="small-8 medium-8 large-8 columns">
-                        <a class="button semiround">Add a Question</a>
-                    </div>
-                    <div id="match_distract_button" class="small-4 medium-4 large-4 columns">
-                        <a class="button semiround">Add a Distractor</a>
-                    </div>
-                </div>
-                */
+
                     case "Fill in the Blank":
+                        break;
+
+                    case "Matching":
                         questionDiv.append(
                             $("<div>", {"class":"row"}).append(
                                 $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
@@ -212,23 +197,19 @@
                                 $("<div>", {"class": "match-question-div"})),
                             $("<div>", {"class": "row"}).append(
                                 $("<div>", {"class": "match-distract-div small-6 medium-6 large-6 columns right"}).append(
-                                    $("<h6>", {"text" : "Distractors"})),
-                            //change this from being from clicking on div to clicking on anchor
+                                    $("<h6>", {"text" : "Distractors"})
+                                    )), //this is to fill up space
                             $("<div>", {"class": "row"}).append(
-                                $("<div>", {"class": "match-question-button small-8 medium-8 large-8 columns"}).append(
+                                $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
                                     $("<a>", {
-                                        "class": "button semiround",
+                                        "class": "match-question-button button semiround",
                                         "text": "Add a Question"
                                     })),
-                                $("<div>", {"class": "match-distract-button small-4 medium-4 large-4 columns"}).append(
+                                $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
                                     $("<a>", {
-                                        "class": "button semiround",
+                                        "class": "match-distract-button button semiround",
                                         "text": "Add a Distractor"
-                                    })))));
-
-                        break;
-
-                    case "Matching":
+                                    }))));
                         break;
                 }
             });
@@ -248,24 +229,45 @@
                 )
                 addQuestionInput.val("");
             });
-            /*
-            $("#accordion").on("click", ".mc-button", function(){
+            
+            $("#accordion").on("click", ".match-question-button", function(){
                 var panel = getPanel($(this));
-                var questionNumber = getQuestionNumber(panel);
-                var radGroup = panel.find(".rad-group");
-                var addQuestionInput = panel.find(".add-question-input");
-                radGroup.append(
-                    $("<input>",{
-                        "type": "radio",
-                        "name": "rad-group-" + questionNumber,
-                    }),
-
-                    $("<label>", {"text": addQuestionInput.val()}),
-                    $("<br>")
-                )
-                addQuestionInput.val("");
+                var matchQuestionDiv = panel.find(".match-question-div");
+                matchQuestionDiv.append(
+                    $("<div>", {"class": "row collapse"}).append(
+                        $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
+                            $("<input>", {
+                                "type": "text"
+                                //add in way to identify question and answer
+                                //"class": "match-"
+                            })),
+                         $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
+                            $("<input>", {
+                                "type": "text",
+                                "class": "postfix"
+                                //add in way to identify question and answer
+                                //"class": "match-"
+                            }))
+                    ))
             });
-            */
+
+            $("#accordion").on("click", ".match-distract-button", function(){
+                var panel = getPanel($(this));
+                var matchDistractDiv = panel.find(".match-distract-div");
+                matchDistractDiv.append(
+                    $("<input>", {
+                        "type": "text"
+                    }))
+            });
+            
+            $("#accordion").on("blur", ".prompt", function(){
+                var panel = getPanel($(this));
+                var panelHeader = getPanelHeader(panel);
+                var panelHeaderText = panelHeader.text();
+                panelHeader.text($(this).val() + panelHeaderText.substring(panelHeaderText.indexOf('|')-1)); 
+            });
+
+
         </script>
     </body>
 </html>
