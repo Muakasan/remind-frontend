@@ -98,30 +98,47 @@
                             "href": "#panel-" + count,
                             "text": "New Question"
                             }),
-                            $("<div>", {
-                                "id": "panel-" + count,
-                                "class": "content"
+                        $("<div>", {
+                            "id": "panel-" + count,
+                            "class": "content"
+                            }).append(
+                            $("<h4>",{"text":"Prompt:"}),
+                            $("<textarea>"),
+                            $("<button>",{
+                                "data-dropdown": "question-type-drop-" + count,
+                                "class": "button dropdown semiround",
+                                "text": "Question Type"
+                                }),
+                            $("<ul>", {
+                                //data dropdown content?
+                                "id": "question-type-drop-" + count,
+                                "class": "f-dropdown semiround",
+                                "aria-hidden": true
                                 }).append(
-                                    $("<h4>",{"text":"Prompt:"}),
-                                    $("<textarea>"),
-                                    $("<button>",{
-                                        "data-dropdown": "question-type-drop-" + count,
-                                        "class": "button dropdown semiround",
-                                        "text": "Question Type"
-                                        }),
-                                    $("<ul>", {
-                                        //data dropdown content?
-                                        "id": "question-type-drop-" + count,
-                                        "class": "f-dropdown semiround",
-                                        "aria-hidden": true
-                                        }).append($("<li>").append(
-                                            $("<a>"{
-                                                "href": "#",
-                                                "text": "Multiple Choice"
-                                                })
-                                        )
+                                $("<li>").append(
+                                    $("<a>", {
+                                        "href": "#",
+                                        "text": "Multiple Choice"
+                                        })),
+                                $("<li>").append(
+                                    $("<a>", {
+                                        "href": "#",
+                                        "text": "Free Response"
+                                        })),
+                                $("<li>").append(
+                                    $("<a>", {
+                                        "href": "#",
+                                        "text": "Fill in the Blank"
+                                        })),
+                                $("<li>").append(
+                                    $("<a>", {
+                                        "href": "#",
+                                        "text": "Matching"
+                                        }
                                     )
-                                )
+                                )                                
+                            )
+                        )
                     )
                 );
                 //tags are created by putting a ul in the html code with an id and then calling the following tagit code with a corresponding id 
@@ -151,15 +168,12 @@
                         break;
 
                     case "Free Response":
-                        alert('hey im a FR question');
                         break;
 
-                    case "Fill in The Blank":
-                        alert('hey im a FTB question');
+                    case "Fill in the Blank":
                         break;
 
                     case "Matching":
-                        alert('hey im a match question');
                         break;
                 }
             });
