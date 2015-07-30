@@ -73,21 +73,23 @@
                 count++;
 
                 //add id to prompt textarea?
-                $("#accordion").append("<li class='accordion-navigation'> \
-                    <a href='#panel-" + count + "'>New Question</a> \
-                    <div id='panel-" + count + "' class='content'> \
-                        <h4>Prompt:</h4> \
-                        <textarea></textarea> \
-                        <button data-dropdown='question_type_drop_"+ count+"' class='button dropdown semiround'>Question Type</button> \
-                        <ul id='question_type_drop_" + count + "' data-dropdown-content class='f-dropdown semiround' aria-hidden='true'> \
-                                <li><a href='#'>Multiple Choice</a></li> \
-                                <li><a href='#'>Free Response</a></li> \
-                                <li><a href='#'>Fill in The Blank</a></li> \
-                                <li><a href='#'>Matching</a></li> \
-                        </ul> \
-                        <ul id='myTags-" + count + "'></ul> \
-                    </div> \
-                </li>");
+                $("#accordion").append(" \
+                    <li class='accordion-navigation'> \
+                        <a href='#panel-" + count + "'>New Question</a> \
+                        <div id='panel-" + count + "' class='content'> \
+                            <h4>Prompt:</h4> \
+                            <textarea></textarea> \
+                            <button data-dropdown='question_type_drop_"+ count+"' class='button dropdown semiround'>Question Type</button> \
+                            <ul id='question_type_drop_" + count + "' data-dropdown-content class='f-dropdown semiround' aria-hidden='true'> \
+                                    <li><a href='#'>Multiple Choice</a></li> \
+                                    <li><a href='#'>Free Response</a></li> \
+                                    <li><a href='#'>Fill in The Blank</a></li> \
+                                    <li><a href='#'>Matching</a></li> \
+                            </ul> \
+                            <div id='question-div-"+ count + "'></div> \
+                            <ul id='myTags-" + count + "'></ul> \
+                        </div> \
+                    </li>");
 
                 //tags are created by putting a ul in the html code with an id and then calling the following tagit code with a corresponding id 
                 $("#myTags-" + count).tagit({
@@ -100,11 +102,19 @@
             $("#accordion").on("click", ".content li", function(){
                 var questionType = $(this).children().text(); //gets the text from the li that was clicked
                 $(this).parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
-                
+                $("#question-div-"+count).html(""); //clear whatever's inside the div
+
                 //This switch determines the question type based on the dropdown that was clicked
                 switch(questionType){ 
                     case "Multiple Choice":
-                        alert('hey im a MC question');
+                        // this will break because it just uses the count rather than checking the count for this particular dorpdown
+                        $("#question-div-"+count).append(" \
+                            Choices<br> \
+                            <input id='mc_input' type='text' placeholder='New Choice'> \
+                            <div class='text-center'> \
+                                <a id='mc_add_choice_btn' class='button success semiround small'>Add Choice</a> \
+                            </div> \
+                            ");
                         break;
 
                     case "Free Response":
@@ -120,8 +130,17 @@
                         break;
                 }
             });
-
-
+            /*
+            $('#mc_add_choice_btn').click(function(){
+                $('#mc_input').before("<input type='radio' name='rad-group-"+count+>");
+                var mc_input_text = $('#mc_input').val();
+                $('#mc_input').prev().val(mc_input_text);
+                var new_mc_option_lab = '<label>'+ mc_input_text +'</label><br>';
+                $('#mc_input').before(new_mc_option_lab);
+                $('#mc_input').val('');        
+                //$(this).prev().val($('#mc_input').text());
+            });
+            */
            // $([data-question-number])
         </script>
     </body>
