@@ -14,14 +14,6 @@
         <script src="../tag-it-master/js/tag-it.js"></script>
         <link rel="stylesheet" href="../jquery-ui-1.11.4.custom/jquery-ui.css" />
         <link rel="stylesheet" href="../tag-it-master/css/jquery.tagit.css"/>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("#myTags").tagit({
-                    placeholderText: "Search...",
-                    caseSensitive: false
-                });
-            });
-        </script>
     </head>
     <body>
         <nav class="top-bar" data-topbar role="navigation">
@@ -74,12 +66,18 @@
 
             });
             */
-            var count = 0;
-            $("#add_question_btn").click(function(){
+            var count = 0; //count which is used to mark question number
+
+            // code to create a new question by adding to the accordion
+            $("#add_question_btn").click(function(){ 
                 count++;
+
+                //add id to prompt textarea?
                 $("#accordion").append("<li class='accordion-navigation'> \
                     <a href='#panel-" + count + "'>New Question</a> \
                     <div id='panel-" + count + "' class='content'> \
+                        <h4>Prompt:</h4> \
+                        <textarea></textarea> \
                         <button data-dropdown='question_type_drop_"+ count+"' class='button dropdown semiround'>Question Type</button> \
                         <ul id='question_type_drop_" + count + "' data-dropdown-content class='f-dropdown semiround' aria-hidden='true'> \
                                 <li><a href='#'>Multiple Choice</a></li> \
@@ -87,12 +85,43 @@
                                 <li><a href='#'>Fill in The Blank</a></li> \
                                 <li><a href='#'>Matching</a></li> \
                         </ul> \
+                        <ul id='myTags-" + count + "'></ul> \
                     </div> \
-                </li>")
+                </li>");
+
+                //tags are created by putting a ul in the html code with an id and then calling the following tagit code with a corresponding id 
+                $("#myTags-" + count).tagit({
+                    placeholderText: "Search...",
+                    caseSensitive: false
+                });
             });
+
+            //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
             $("#accordion").on("click", ".content li", function(){
-                $(this).parent().prev().text($(this).children().text());
+                var questionType = $(this).children().text(); //gets the text from the li that was clicked
+                $(this).parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
+                
+                //This switch determines the question type based on the dropdown that was clicked
+                switch(questionType){ 
+                    case "Multiple Choice":
+                        alert('hey im a MC question');
+                        break;
+
+                    case "Free Response":
+                        alert('hey im a FR question');
+                        break;
+
+                    case "Fill in The Blank":
+                        alert('hey im a FTB question');
+                        break;
+
+                    case "Matching":
+                        alert('hey im a match question');
+                        break;
+                }
             });
+
+
            // $([data-question-number])
         </script>
     </body>
