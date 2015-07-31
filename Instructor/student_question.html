@@ -18,15 +18,31 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#myTags,#myTags2,#myTags3,#myTags4").tagit({
-                    placeholderText: "Search...",
+                    placeholderText: "Empty",
                     caseSensitive: false,
                     readOnly: true
                 });
-
+            
             });
         </script>
     </head>
     <body>
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="#">Remind</a></h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li><a href="#">Manage Courses</a></li>
+                    <li><a href="#">My Courses</a></li>
+                    <li><a href="#">Manage Instructors</a></li>
+                    <li><a href="#">Manage Students</a></li>
+                    <li><a href="#">Me</a></li>
+                </ul>
+            </section>
+        </nav>
         <div class="row">
             <div class="large-12 medium-12 small-12 columns">
                 <h1>Econ</h1>
@@ -67,18 +83,55 @@
                     <div class="content active" id="panel11">
                         <ul class="accordion" data-accordion>
                             <li class="accordion-navigation">
-                                <a href="#panel1a">Multiple Choice<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Which color has the highest wavelength?</label></a>
-                                <div id="panel1a" class="content active">
+                                <a href="#panel1a">Multiple Choice<label>Which color has the highest wavelength?</label></a>
+                                <div id="panel1a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    Prompt
+                                        Prompt
                                     </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                        <a href="#" class="button tiny semiround alert right">Reject</a>
-                                        <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Which color has the highest wavelength?</textarea>
-                                    <div> 
-                                    Choices<br>
+                                    <div>
+                                        Choices<br>
                                         <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
                                         <input type="radio" disabled name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
                                         <br>
@@ -88,51 +141,88 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel2a">Matching<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Match the president to thier dog</label></a>
+                                <a href="#panel2a">Matching<label>Match the president to thier dog</label></a>
                                 <div id="panel2a" class="content">
                                     <div class="row">
-                                       <div class="large-7 medium-7 small-7 columns">
-                                        Matching
-                                        </div> 
+                                        <div class="large-7 medium-7 small-7 columns">
+                                            Matching
+                                        </div>
                                         <div class="large-5 medium-5 small-5 columns">
-                                            <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                            <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                            <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                            <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                            <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                                <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                                <ul class="inline-list">
+                                                    <br>
+                                                    <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                            <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                                <h3 id="approveModal1">Question Approved</h3>
+                                                <p>Which Unreleased Module would you like to add it to?</p>
+                                                <ul class="inline-list">
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 5</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 9</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Create a New</h4>
+                                                            <h4>Module</h4>
+                                                            <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>George Washington</h5>
+                                            <h5>George Washington</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">a</a>
-                                        <h5>&nbsp;Sweet Lips</h5>
+                                            <a class="button tiny semiround success left">a</a>
+                                            <h5>&nbsp;Sweet Lips</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>John Appleseed</h5>
+                                            <h5>John Appleseed</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">b</a>
-                                        <h5>&nbsp;Ace</h5>
+                                            <a class="button tiny semiround success left">b</a>
+                                            <h5>&nbsp;Ace</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>Dick Grayson</h5>
+                                            <h5>Dick Grayson</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">c</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">c</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <br>
@@ -141,18 +231,55 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel3a">Free Response<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Where is the Great Pyramid?</label></a>
+                                <a href="#panel3a">Free Response<label>Where is the Great Pyramid?</label></a>
                                 <div id="panel3a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Where is the Great Pyramid?</textarea>
                                     <div> 
-                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                        <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
                                         <textarea readonly>Giza</textarea>
                                     </div>
                                     <br>
@@ -161,22 +288,59 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel4a">Fill in The Blank<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Please expand to view question</label></a>
+                                <a href="#panel4a">Fill in The Blank<label>Please expand to view question</label></a>
                                 <div id="panel4a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
-                                    <div class="large-12 coulumns">
-                                    Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
-                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
-                                              <li><a href="#"> Lee Harvey Oswald</a></li>
-                                              <li><a href="#">Donky Kong</a></li>
-                                              <li><a href="#">Elsbeth</a></li>
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
                                             </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
+                                    <div class="large-12 coulumns">
+                                        Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
+                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                                            <li><a href="#"> Lee Harvey Oswald</a></li>
+                                            <li><a href="#">Donky Kong</a></li>
+                                            <li><a href="#">Elsbeth</a></li>
+                                        </ul>
                                         <ul id="hover2" class="f-dropdown" data-dropdown-content>
                                             <li><a href="#">Barney Regime</a></li>
                                             <li><a href="#">Cold War</a></li>
@@ -189,23 +353,59 @@
                                 </div>
                             </li>
                         </ul>
-
                     </div>
                     <div class="content" id="panel21">
                         <ul class="accordion" data-accordion>
                             <li class="accordion-navigation">
-                                <a href="#panel1a">Multiple Choice<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Which color has the highest wavelength?</label></a>
-                                <div id="panel1a" class="content active">
+                                <a href="#panel1a">Multiple Choice<label>Which color has the highest wavelength?</label></a>
+                                <div id="panel1a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    Prompt
+                                        Prompt
                                     </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                        <a href="#" class="button tiny semiround alert right">Reject</a>
-                                        <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Which color has the highest wavelength?</textarea>
-                                    <div> 
-                                    Choices<br>
+                                    <div>
+                                        Choices<br>
                                         <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
                                         <input type="radio" disabled name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
                                         <br>
@@ -215,51 +415,88 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel2a">Matching<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Match the president to thier dog</label></a>
+                                <a href="#panel2a">Matching<label>Match the president to thier dog</label></a>
                                 <div id="panel2a" class="content">
                                     <div class="row">
-                                       <div class="large-7 medium-7 small-7 columns">
-                                        Matching
-                                        </div> 
+                                        <div class="large-7 medium-7 small-7 columns">
+                                            Matching
+                                        </div>
                                         <div class="large-5 medium-5 small-5 columns">
-                                            <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                            <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                            <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                            <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                            <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                                <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                                <ul class="inline-list">
+                                                    <br>
+                                                    <li><a class="close button semiround">Cancel</a></li>
+                                                    <li><a class="close button alert semiround">Reject</a></li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                            <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                                <h3 id="approveModal1">Question Approved</h3>
+                                                <p>Which Unreleased Module would you like to add it to?</p>
+                                                <ul class="inline-list">
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 5</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 9</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Create a New</h4>
+                                                            <h4>Module</h4>
+                                                            <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>George Washington</h5>
+                                            <h5>George Washington</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">a</a>
-                                        <h5>&nbsp;Sweet Lips</h5>
+                                            <a class="button tiny semiround success left">a</a>
+                                            <h5>&nbsp;Sweet Lips</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>John Appleseed</h5>
+                                            <h5>John Appleseed</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">b</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">b</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>Dick Grayson</h5>
+                                            <h5>Dick Grayson</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">c</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">c</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <br>
@@ -268,18 +505,55 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel3a">Free Response<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Where is the Great Pyramid?</label></a>
+                                <a href="#panel3a">Free Response<label>Where is the Great Pyramid?</label></a>
                                 <div id="panel3a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Where is the Great Pyramid?</textarea>
                                     <div> 
-                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                        <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
                                         <textarea readonly>Giza</textarea>
                                     </div>
                                     <br>
@@ -288,22 +562,59 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel4a">Fill in The Blank<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Please expand to view question</label></a>
+                                <a href="#panel4a">Fill in The Blank<label>Please expand to view question</label></a>
                                 <div id="panel4a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
-                                    <div class="large-12 coulumns">
-                                    Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
-                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
-                                              <li><a href="#"> Lee Harvey Oswald</a></li>
-                                              <li><a href="#">Donky Kong</a></li>
-                                              <li><a href="#">Elsbeth</a></li>
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
                                             </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
+                                    <div class="large-12 coulumns">
+                                        Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
+                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                                            <li><a href="#"> Lee Harvey Oswald</a></li>
+                                            <li><a href="#">Donky Kong</a></li>
+                                            <li><a href="#">Elsbeth</a></li>
+                                        </ul>
                                         <ul id="hover2" class="f-dropdown" data-dropdown-content>
                                             <li><a href="#">Barney Regime</a></li>
                                             <li><a href="#">Cold War</a></li>
@@ -320,18 +631,55 @@
                     <div class="content" id="panel31">
                         <ul class="accordion" data-accordion>
                             <li class="accordion-navigation">
-                                <a href="#panel1a">Multiple Choice<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Which color has the highest wavelength?</label></a>
-                                <div id="panel1a" class="content active">
+                                <a href="#panel1a">Multiple Choice<label>Which color has the highest wavelength?</label></a>
+                                <div id="panel1a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    Prompt
+                                        Prompt
                                     </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                        <a href="#" class="button tiny semiround alert right">Reject</a>
-                                        <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Which color has the highest wavelength?</textarea>
-                                    <div> 
-                                    Choices<br>
+                                    <div>
+                                        Choices<br>
                                         <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
                                         <input type="radio" disabled name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
                                         <br>
@@ -341,51 +689,88 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel2a">Matching<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Match the president to thier dog</label></a>
+                                <a href="#panel2a">Matching<label>Match the president to thier dog</label></a>
                                 <div id="panel2a" class="content">
                                     <div class="row">
-                                       <div class="large-7 medium-7 small-7 columns">
-                                        Matching
-                                        </div> 
+                                        <div class="large-7 medium-7 small-7 columns">
+                                            Matching
+                                        </div>
                                         <div class="large-5 medium-5 small-5 columns">
-                                            <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                            <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                            <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                            <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                            <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                                <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                                <ul class="inline-list">
+                                                    <br>
+                                                    <li><a class="close button semiround">Cancel</a></li>
+                                                    <li><a class="close button alert semiround">Reject</a></li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                            <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                                <h3 id="approveModal1">Question Approved</h3>
+                                                <p>Which Unreleased Module would you like to add it to?</p>
+                                                <ul class="inline-list">
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 5</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 9</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Create a New</h4>
+                                                            <h4>Module</h4>
+                                                            <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>George Washington</h5>
+                                            <h5>George Washington</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">a</a>
-                                        <h5>&nbsp;Sweet Lips</h5>
+                                            <a class="button tiny semiround success left">a</a>
+                                            <h5>&nbsp;Sweet Lips</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>John Appleseed</h5>
+                                            <h5>John Appleseed</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">b</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">b</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>Dick Grayson</h5>
+                                            <h5>Dick Grayson</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">c</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">c</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <br>
@@ -394,18 +779,55 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel3a">Free Response<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Where is the Great Pyramid?</label></a>
+                                <a href="#panel3a">Free Response<label>Where is the Great Pyramid?</label></a>
                                 <div id="panel3a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Where is the Great Pyramid?</textarea>
                                     <div> 
-                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                        <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
                                         <textarea readonly>Giza</textarea>
                                     </div>
                                     <br>
@@ -414,22 +836,59 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel4a">Fill in The Blank<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Please expand to view question</label></a>
+                                <a href="#panel4a">Fill in The Blank<label>Please expand to view question</label></a>
                                 <div id="panel4a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
-                                    <div class="large-12 coulumns">
-                                    Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
-                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
-                                              <li><a href="#"> Lee Harvey Oswald</a></li>
-                                              <li><a href="#">Donky Kong</a></li>
-                                              <li><a href="#">Elsbeth</a></li>
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
                                             </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
+                                    <div class="large-12 coulumns">
+                                        Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
+                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                                            <li><a href="#"> Lee Harvey Oswald</a></li>
+                                            <li><a href="#">Donky Kong</a></li>
+                                            <li><a href="#">Elsbeth</a></li>
+                                        </ul>
                                         <ul id="hover2" class="f-dropdown" data-dropdown-content>
                                             <li><a href="#">Barney Regime</a></li>
                                             <li><a href="#">Cold War</a></li>
@@ -446,18 +905,55 @@
                     <div class="content" id="panel41">
                         <ul class="accordion" data-accordion>
                             <li class="accordion-navigation">
-                                <a href="#panel1a">Multiple Choice<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Which color has the highest wavelength?</label></a>
-                                <div id="panel1a" class="content active">
+                                <a href="#panel1a">Multiple Choice<label>Which color has the highest wavelength?</label></a>
+                                <div id="panel1a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    Prompt
+                                        Prompt
                                     </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                        <a href="#" class="button tiny semiround alert right">Reject</a>
-                                        <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Which color has the highest wavelength?</textarea>
-                                    <div> 
-                                    Choices<br>
+                                    <div>
+                                        Choices<br>
                                         <input type="radio" checked="checked" name="light" value="Red" id="lightRed"><label for="pokemonRed">Red</label><br>
                                         <input type="radio" disabled name="light" value="Blue" id="lightBlue"><label for="pokemonBlue">Blue</label>
                                         <br>
@@ -467,51 +963,88 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel2a">Matching<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Match the president to thier dog</label></a>
+                                <a href="#panel2a">Matching<label>Match the president to thier dog</label></a>
                                 <div id="panel2a" class="content">
                                     <div class="row">
-                                       <div class="large-7 medium-7 small-7 columns">
-                                        Matching
-                                        </div> 
+                                        <div class="large-7 medium-7 small-7 columns">
+                                            Matching
+                                        </div>
                                         <div class="large-5 medium-5 small-5 columns">
-                                            <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                            <a href="#" class="button tiny semiround right">Approve</a>
-                                        </div> 
+                                            <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                            <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                            <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                                <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                                <ul class="inline-list">
+                                                    <br>
+                                                    <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                            <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                                <h3 id="approveModal1">Question Approved</h3>
+                                                <p>Which Unreleased Module would you like to add it to?</p>
+                                                <ul class="inline-list">
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 5</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Module 9</h4>
+                                                            <p># Questions</p>
+                                                            <a href="#" class="close button small semiround success">Add</a>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="panel callout radius" data-equalizer-watch>
+                                                            <h4>Create a New</h4>
+                                                            <h4>Module</h4>
+                                                            <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>George Washington</h5>
+                                            <h5>George Washington</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">a</a>
-                                        <h5>&nbsp;Sweet Lips</h5>
+                                            <a class="button tiny semiround success left">a</a>
+                                            <h5>&nbsp;Sweet Lips</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>John Appleseed</h5>
+                                            <h5>John Appleseed</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">b</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">b</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="large-2 medium-2 small-2 columns">
-                                        <input type="text" class="value" maxlength="2" size="2">
+                                            <input type="text" class="value" maxlength="2" size="2">
                                         </div>
                                         <div class="large-4 medium-4 small-4 columns">
-                                        <h5>Dick Grayson</h5>
+                                            <h5>Dick Grayson</h5>
                                         </div>
                                         <div class="large-6 medium-6 small-6 columns">
-                                        <a class="button tiny semiround success left">c</a>
-                                        <h5>&nbsp;Juno</h5>
+                                            <a class="button tiny semiround success left">c</a>
+                                            <h5>&nbsp;Juno</h5>
                                         </div>
                                     </div>
                                     <br>
@@ -520,18 +1053,55 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel3a">Free Response<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Where is the Great Pyramid?</label></a>
+                                <a href="#panel3a">Free Response<label>Where is the Great Pyramid?</label></a>
                                 <div id="panel3a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
                                     <textarea readonly>Where is the Great Pyramid?</textarea>
                                     <div> 
-                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                        <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
                                         <textarea readonly>Giza</textarea>
                                     </div>
                                     <br>
@@ -540,22 +1110,59 @@
                                 </div>
                             </li>
                             <li class="accordion-navigation">
-                                <a href="#panel4a">Fill in The Blank<div class="button right semiround alert tiny">Reject</div><div class="button right semiround tiny">Approve</div><label>Please expand to view question</label></a>
+                                <a href="#panel4a">Fill in The Blank<label>Please expand to view question</label></a>
                                 <div id="panel4a" class="content">
                                     <div class="large-7 medium-7 small-7 columns">
-                                    <strong>Prompt:</strong>
-                                    </div> 
+                                        <strong>Prompt:</strong>
+                                    </div>
                                     <div class="large-5 medium-5 small-5 columns">
-                                    <a href="#" class="button tiny semiround alert right">Reject</a> 
-                                    <a href="#" class="button tiny semiround right">Approve</a>
-                                    </div> 
-                                    <div class="large-12 coulumns">
-                                    Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
-                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
-                                              <li><a href="#"> Lee Harvey Oswald</a></li>
-                                              <li><a href="#">Donky Kong</a></li>
-                                              <li><a href="#">Elsbeth</a></li>
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right alert">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                        <div id ="rejectModal1" class="tiny reveal-modal"data-reveal>
+                                            <h3 id="rejectModal1">Are you sure you want to reject this students question?</h3>
+                                            <ul class="inline-list">
+                                                <br>
+                                                <li><a class="close button semiround">Cancel</a></li>
+                                                <li><a class="close button alert semiround">Reject</a></li>
                                             </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                        <div id ="approveModal1" class="medium reveal-modal"data-reveal>
+                                            <h3 id="approveModal1">Question Approved</h3>
+                                            <p>Which Unreleased Module would you like to add it to?</p>
+                                            <ul class="inline-list">
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 5</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Module 9</h4>
+                                                        <p># Questions</p>
+                                                        <a href="#" class="close button small semiround success">Add</a>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="panel callout radius" data-equalizer-watch>
+                                                        <h4>Create a New</h4>
+                                                        <h4>Module</h4>
+                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                            <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                                    </div>
+                                    <div class="large-12 coulumns">
+                                        Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
+                                        <ul id="hover1" class="f-dropdown" data-dropdown-content>
+                                            <li><a href="#"> Lee Harvey Oswald</a></li>
+                                            <li><a href="#">Donky Kong</a></li>
+                                            <li><a href="#">Elsbeth</a></li>
+                                        </ul>
                                         <ul id="hover2" class="f-dropdown" data-dropdown-content>
                                             <li><a href="#">Barney Regime</a></li>
                                             <li><a href="#">Cold War</a></li>
@@ -575,5 +1182,8 @@
     </body>
     <script>
         $(document).foundation();
+        $('a.close').on('click', function() {
+            $(this).foundation('reveal', 'close');
+            });
     </script>
 </html>

@@ -12,6 +12,18 @@
 		    I am a modal
 		    <a class="close button alert semiround">Close</a>
 		</div>
+
+                                        <a href="#" data-reveal-id="rejectModal1" class="semiround button tiny right">Reject</a>
+                                        <a href="#" data-reveal-id="approveModal1" class="semiround button tiny right">Approve</a>
+                                    <div id ="rejectModal1" class="tiny 	reveal-modal" data-reveal>
+                                    <h3 id="firstModalTitle">Are you sure you want to reject this students question?</h3>
+                                        <ul class="inline-list">
+                                             <li><a class="close button alert semiround">Reject</a></li>
+                                             <li><a class="close button semiround">No</a></li>
+                                         </ul>
+                                          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                        </div>
+                               
 		<script type="text/javascript">
         	$(document).foundation();
         	$('a.close').on('click', function() {
