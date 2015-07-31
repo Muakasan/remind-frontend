@@ -38,15 +38,15 @@
             </div>
         </div>
         <div class="row">
-            <a id="add_question_btn" class="button semiround" href="#">Add a Question</a>
+            <a id="add-question-btn" class="button semiround" href="#">Add a Question</a>
         </div>
         <div class="row">
             <ul id="accordion" class="accordion" data-accordion>
                 <li class="accordion-navigation">
                     <a href="#panel">Which Class has the Highest Wavelength?</a>        
                     <div id="panel" class="content">
-                        <button href="#" data-dropdown="question_type_drop" class="button dropdown semiround">Question Type</button>
-                        <ul id="question_type_drop" data-dropdown-content class="f-dropdown semiround" aria-hidden="true">
+                        <button href="#" data-dropdown="question-type-drop" class="button dropdown semiround">Question Type</button>
+                        <ul id="question-type-drop" data-dropdown-content class="f-dropdown semiround" aria-hidden="true">
                             <li><a href="#">Multiple Choice</a></li>
                             <li><a href="#">Free Response</a></li>
                             <li><a href="#">Fill in The Blank</a></li>
@@ -61,8 +61,8 @@
             $(document).foundation();
             
             var getQuestionNumber = function(panel){
-                panel_id = panel.attr("id");
-                return String(panel_id.substring(panel_id.indexOf('-')+1));
+                panelId = panel.attr("id");
+                return String(panelId.substring(panelId.indexOf('-')+1));
             }
             
             var getPanel = function(element){
@@ -76,9 +76,8 @@
             var count = 0; //count which is used to mark question number
 
             // code to create a new question by adding to the accordion
-            $("#add_question_btn").click(function(){ 
+            $("#add-question-btn").click(function(){ 
                 count++;
-
                 //attach a question to the accordion
                 $("#accordion").append(
                     $("<li>", {"class":"accordion-navigation"}).append(
@@ -183,6 +182,27 @@
                         break;
 
                     case "Fill in the Blank":
+                        questionDiv.append(
+                            $("<div>",{"class": "ftb-div-1"}).append(
+                                $("<h6>", {"text": "Content:"}),
+                                //add something to this text area?
+                                $("<textarea>", {"class":"ftb-textarea"}),
+                                $("<div>", {"class": "text-center"}).append(
+                                    //something to identify this?
+                                    $("<a>", {
+                                        "class": "ftb-submit-content-button button semiround",
+                                        "text": "Submit Text Content"
+                                }))),
+                            $("<div>",{"class": "ftb-div-2"}).append(
+                                $("<div>", {"class": "row"}).append(
+                                    $("<div>", {"class":"small-8 medium-6 large-8 columns"}).append(
+                                        $("<div>", {"class":"ftb-text panel callout semiround"})),
+                                        $("<a>", {
+                                            "class":"ftb-clear button semiround alert small",
+                                            "text":"clear"
+                                        })),
+                                $("<div>", {"class": "ftb-content-div"})
+                                ).hide());
                         break;
 
                     case "Matching":
@@ -213,6 +233,8 @@
                         break;
                 }
             });
+            
+            //Mutiple Choice Questions
             $("#accordion").on("click", ".mc-button", function(){
                 var panel = getPanel($(this));
                 var questionNumber = getQuestionNumber(panel);
@@ -230,6 +252,7 @@
                 addQuestionInput.val("");
             });
             
+            //Matching Questions
             $("#accordion").on("click", ".match-question-button", function(){
                 var panel = getPanel($(this));
                 var matchQuestionDiv = panel.find(".match-question-div");
@@ -260,14 +283,108 @@
                     }))
             });
             
+            //Fill in the Blank Questions
+            $("#accordion").on("click", ".ftb-submit-content-button", function(){
+                var panel = getPanel($(this));
+                var div1 = panel.find(".ftb-div-1");
+                var div2 = panel.find(".ftb-div-2");
+                div1.hide();
+                panel.find(".ftb-text").text(panel.find(".ftb-textarea").val());
+                panel.find(".ftb-text").each(function() {
+                    $(this).html($(this).text().replace(/(\w+\'\w+|\w+’\w+|\w+)/g, "<span>$1</span>"));
+                });
+                div2.show();
+            });
+            /*
+            $(document).on("click", "span", function(){
+                alert("ayyyy");
+            });
+            */
+            //$("accordion").on("click", "span", function(){
+            $(document).on("click", ".ftb-text span", function(){
+                var panel = getPanel($(this));
+                var contentDiv = panel.find(".ftb-content-div"); 
+                if(!$(this).hasClass('info')){
+                    $(this).addClass('info label semiround');
+                    contentDiv.append(
+                        $("<div>", {"class":"row"}).append(
+                            $("<h4>", {"text": $(this).text()}),
+                            $("<h6>", {"text":"Distractors"}),
+                            $("<div>", {"class": "small-12 medium-12 large-12 columns"}).append(
+                                $("<a>", {
+                                    "class":"button semiround ftb-distractor-button-" + count, //change to ftbcount?
+                                    "text":"Add a Distractor"
+                                }))));
+
+                    /*
+                    add input 
+                    $("accordion").on("click", ".ftb-distractor-button", function(){
+                        $(this)
+                        ftbCount++
+                    });
+                    */
+                    
+                }
+            });
+   
+/*
+    $('#ftb_clear').click(function(){
+        $('#ftb_div_content').html('');
+        $('#ftb_div_2').hide();
+        $('#ftb_div_1').show();
+        count=1;
+    });
+*/
+            /*
+            var wrapwords = function() {
+    $('#ftb_text').each(function() {
+        //$(this).html($(this).text().replace(/\b(\w+)\b/g, "<span>$1</span>"));
+        $(this).html($(this).text().replace(/(\w+\'\w+|\w+’\w+|\w+)/g, "<span>$1</span>"));
+    });
+    var count = 1;
+    $(document).on('click', '#ftb_text span', function(){
+        if(!$(this).hasClass('info')){
+            $(this).addClass('info label semiround');
+            //$(this).text(count+'. '+$(this).text());
+            var new_blank_row = "<div class='row'> \
+                                    <h4>"+$(this).text()+"</h4> \
+                                    <h6>Distractors</h6> \
+                                    <div class='small-12 medium-12 large-12 columns'> \
+                                        <a id=ftb_distractor_"+count+" class='button semiround'>Add a Distractor</a> \
+                                    </div> \
+                                </div>"
+            $('#ftb_div_content').append(new_blank_row);
+            $(document).on('click', '#ftb_distractor_'+count, function(){
+            $(this).before('<input type="text"></input>');
+            $(this).prev().addClass($(this).attr('id')+'_input');
+            });
+            count++;
+        }
+        });
+    }
+
+    $('#ftb_div_2').hide();
+    $('#ftb_text_btn').click(function(){
+        $('#ftb_div_1').hide();
+        $('#ftb_text').text($('#ftb_textarea').val());
+        $('#ftb_div_2').show();
+        wrapwords();
+    });
+
+    $('#ftb_clear').click(function(){
+        $('#ftb_div_content').html('');
+        $('#ftb_div_2').hide();
+        $('#ftb_div_1').show();
+        count=1;
+    });
+*/
+            //Changes text in header when the prompt textbox loses focus
             $("#accordion").on("blur", ".prompt", function(){
                 var panel = getPanel($(this));
                 var panelHeader = getPanelHeader(panel);
                 var panelHeaderText = panelHeader.text();
                 panelHeader.text($(this).val() + panelHeaderText.substring(panelHeaderText.indexOf('|')-1)); 
             });
-
-
         </script>
     </body>
 </html>

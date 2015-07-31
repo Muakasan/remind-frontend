@@ -168,7 +168,8 @@
     //Fill in the Blank
     var wrapwords = function() {
     $('#ftb_text').each(function() {
-        $(this).html($(this).text().replace(/\b(\w+)\b/g, "<span>$1</span>"));
+        //$(this).html($(this).text().replace(/\b(\w+)\b/g, "<span>$1</span>"));
+        $(this).html($(this).text().replace(/(\w+\'\w+|\w+’\w+|\w+)/g, "<span>$1</span>"));
     });
     var count = 1;
     $(document).on('click', '#ftb_text span', function(){
