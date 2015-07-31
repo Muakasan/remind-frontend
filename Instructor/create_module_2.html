@@ -179,6 +179,10 @@
                         break;
 
                     case "Free Response":
+                        questionDiv.append($("<h6>", {
+                            "text":"Answer"}),
+                        $("<textarea>"),
+                        $("<br>"));
                         break;
 
                     case "Fill in the Blank":
@@ -291,17 +295,13 @@
                 div1.hide();
                 panel.find(".ftb-text").text(panel.find(".ftb-textarea").val());
                 panel.find(".ftb-text").each(function() {
-                    $(this).html($(this).text().replace(/(\w+\'\w+|\w+’\w+|\w+)/g, "<span>$1</span>"));
+                    $(this).html($(this).text().replace(/([A-Za-z0-9\'’]+)/g, "<span>$1</span>"));
                 });
                 div2.show();
             });
-            /*
-            $(document).on("click", "span", function(){
-                alert("ayyyy");
-            });
-            */
-            //$("accordion").on("click", "span", function(){
+            //Why doesnt this work?: $("accordion").on("click", "span", function(){
             $(document).on("click", ".ftb-text span", function(){
+                count++;
                 var panel = getPanel($(this));
                 var contentDiv = panel.find(".ftb-content-div"); 
                 if(!$(this).hasClass('info')){
@@ -311,73 +311,26 @@
                             $("<h4>", {"text": $(this).text()}),
                             $("<h6>", {"text":"Distractors"}),
                             $("<div>", {"class": "small-12 medium-12 large-12 columns"}).append(
+                                $("<div>", {"class": "row"}).append(
+                                    $("<div>", {"id": "ftb-question-div-" + count, "class":"small-12 medium-12 large-12 columns"})),
                                 $("<a>", {
-                                    "class":"button semiround ftb-distractor-button-" + count, //change to ftbcount?
+                                    "id": "ftb-distractor-button-" + count,
+                                    "class":"button semiround" , //change to ftbcount?
                                     "text":"Add a Distractor"
                                 }))));
-
-                    /*
-                    add input 
-                    $("accordion").on("click", ".ftb-distractor-button", function(){
-                        $(this)
-                        ftbCount++
-                    });
-                    */
-                    
                 }
             });
-   
-/*
-    $('#ftb_clear').click(function(){
-        $('#ftb_div_content').html('');
-        $('#ftb_div_2').hide();
-        $('#ftb_div_1').show();
-        count=1;
-    });
-*/
-            /*
-            var wrapwords = function() {
-    $('#ftb_text').each(function() {
-        //$(this).html($(this).text().replace(/\b(\w+)\b/g, "<span>$1</span>"));
-        $(this).html($(this).text().replace(/(\w+\'\w+|\w+’\w+|\w+)/g, "<span>$1</span>"));
-    });
-    var count = 1;
-    $(document).on('click', '#ftb_text span', function(){
-        if(!$(this).hasClass('info')){
-            $(this).addClass('info label semiround');
-            //$(this).text(count+'. '+$(this).text());
-            var new_blank_row = "<div class='row'> \
-                                    <h4>"+$(this).text()+"</h4> \
-                                    <h6>Distractors</h6> \
-                                    <div class='small-12 medium-12 large-12 columns'> \
-                                        <a id=ftb_distractor_"+count+" class='button semiround'>Add a Distractor</a> \
-                                    </div> \
-                                </div>"
-            $('#ftb_div_content').append(new_blank_row);
-            $(document).on('click', '#ftb_distractor_'+count, function(){
-            $(this).before('<input type="text"></input>');
-            $(this).prev().addClass($(this).attr('id')+'_input');
+
+            $("#accordion").on("click", "[id^='ftb-distractor-button-']", function(){
+                var panel = getPanel($(this));
+                var id = this.id;
+                questionNumber = id.substring(id.lastIndexOf('-')+1);
+                questionDiv = panel.find("#ftb-question-div-" + questionNumber);
+                questionDiv.append($("<input>", {
+                    "type":"text"
+                }));
             });
-            count++;
-        }
-        });
-    }
 
-    $('#ftb_div_2').hide();
-    $('#ftb_text_btn').click(function(){
-        $('#ftb_div_1').hide();
-        $('#ftb_text').text($('#ftb_textarea').val());
-        $('#ftb_div_2').show();
-        wrapwords();
-    });
-
-    $('#ftb_clear').click(function(){
-        $('#ftb_div_content').html('');
-        $('#ftb_div_2').hide();
-        $('#ftb_div_1').show();
-        count=1;
-    });
-*/
             //Changes text in header when the prompt textbox loses focus
             $("#accordion").on("blur", ".prompt", function(){
                 var panel = getPanel($(this));
