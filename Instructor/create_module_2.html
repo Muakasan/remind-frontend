@@ -42,6 +42,7 @@
         </div>
         <div class="row">
             <ul id="accordion" class="accordion" data-accordion>
+                <!--
                 <li class="accordion-navigation">
                     <a href="#panel">Which Class has the Highest Wavelength?</a>        
                     <div id="panel" class="content">
@@ -54,6 +55,7 @@
                         </ul>
                     </div>
                 </li>
+            -->
             </ul>
         </div>
         <br><br>
@@ -95,7 +97,8 @@
                             $("<button>",{
                                 "data-dropdown": "question-type-drop-" + count,
                                 "class": "button dropdown semiround",
-                                "text": "Question Type"
+                                "text": "Question Type",
+                                "id": "data-dropdown-button-" + count
                                 }),
                             $("<ul>", {
                                 "data-dropdown-content": true,
@@ -133,6 +136,7 @@
                             $("<div>", {
                                 "class": "question-div"
                             }),
+                            $("<h4>", {"text":"Tags:"}),
                             $("<ul>", {
                                 "id": "myTags-" + count
                             })
@@ -141,100 +145,105 @@
                 );
                 //tags are created by putting a ul in the html code with an id and then calling the following tagit code with a corresponding id 
                 $("#myTags-" + count).tagit({
-                    placeholderText: "Search...",
+                    placeholderText: "Add a Tag",
                     caseSensitive: false
                 });
+            });
+            $("#accordion").on("click", "button", function(){
+                alert($(this).attr("id"));
             });
 
             //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
             $("#accordion").on("click", ".question-type-option", function(){
                 var questionType = $(this).text(); //gets the text from the li that was clicked
-                $(this).parent().parent().prev().text(questionType); //changes the dropdown buttons text to the li's text
-                
-                var panel = getPanel($(this)); //gets the panel
-                var panelHeader = getPanelHeader(panel);
-                var panelHeaderText = panelHeader.text();
-                panelHeader.text(panelHeaderText.substring(0, panelHeaderText.indexOf('|')+2)+questionType); 
-                
-                var questionDiv = panel.children(".question-div");
-                questionDiv.html("");
-                //This switch determines the question type based on the dropdown that was clicked
-                switch(questionType){ 
-                    case "Multiple Choice":
-                        questionDiv.append(
-                            $("<p>", {"text": "Choices"}),
-                            $("<div>", {"class":"mc-rad-group"}),
-                            $("<input>", {
-                                "type": "text",
-                                "class": "mc-add-question-input",
-                                "placeholder": "New Choice"
-                            }),
-                            $("<div>", {"class": "text-center"}).append(
-                                $("<a>", {                                    
-                                    "class": "button success semiround small mc-button",
-                                    "text": "Add Choice"
-                                })
-                            )
-                        )
-                        break;
-
-                    case "Free Response":
-                        questionDiv.append($("<h6>", {
-                            "text":"Answer"}),
-                        $("<textarea>"),
-                        $("<br>"));
-                        break;
-
-                    case "Fill in the Blank":
-                        questionDiv.append(
-                            $("<div>",{"class": "ftb-div-1"}).append(
-                                $("<h6>", {"text": "Content:"}),
-                                //add something to this text area?
-                                $("<textarea>", {"class":"ftb-textarea"}),
+                var dropdownButton =  $(this).parent().parent().prev();
+                if(dropdownButton.text()!=questionType){ //changes the dropdown buttons text to the li's text
+                    dropdownButton.text(questionType);
+                    var panel = getPanel($(this)); //gets the panel
+                    var panelHeader = getPanelHeader(panel);
+                    var panelHeaderText = panelHeader.text();
+                    panelHeader.text(panelHeaderText.substring(0, panelHeaderText.indexOf('|')+2)+questionType); 
+                    
+                    var questionDiv = panel.children(".question-div");
+                    questionDiv.html("");
+                    //This switch determines the question type based on the dropdown that was clicked
+                    switch(questionType){ 
+                        case "Multiple Choice":
+                            questionDiv.append(
+                                $("<p>", {"text": "Choices"}),
+                                $("<div>", {"class":"mc-rad-group"}),
+                                $("<input>", {
+                                    "type": "text",
+                                    "class": "mc-add-question-input",
+                                    "placeholder": "New Choice"
+                                }),
                                 $("<div>", {"class": "text-center"}).append(
-                                    //something to identify this?
-                                    $("<a>", {
-                                        "class": "ftb-submit-content-button button semiround",
-                                        "text": "Submit Text Content"
-                                }))),
-                            $("<div>",{"class": "ftb-div-2"}).append(
-                                $("<div>", {"class": "row"}).append(
-                                    $("<div>", {"class":"small-8 medium-6 large-8 columns"}).append(
-                                        $("<div>", {"class":"ftb-text panel callout semiround"})),
-                                        $("<a>", {
-                                            "class":"ftb-clear button semiround alert small",
-                                            "text":"clear"
-                                        })),
-                                $("<div>", {"class": "ftb-content-div"})
-                                ).hide());
-                        break;
+                                    $("<a>", {                                    
+                                        "class": "button success semiround small mc-button",
+                                        "text": "Add Choice"
+                                    })
+                                )
+                            )
+                            break;
 
-                    case "Matching":
-                        questionDiv.append(
-                            $("<div>", {"class":"row"}).append(
-                                $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
-                                    $("<h4>", {"text": "Questions"})),
-                                $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
-                                    $("<h4>", {"text": "Options"}))
-                                ),
-                            $("<div>", {"class": "row"}).append(
-                                $("<div>", {"class": "match-question-div"})),
-                            $("<div>", {"class": "row"}).append(
-                                $("<div>", {"class": "match-distract-div small-6 medium-6 large-6 columns right"}).append(
-                                    $("<h6>", {"text" : "Distractors"})
-                                    )), //this is to fill up space
-                            $("<div>", {"class": "row"}).append(
-                                $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
-                                    $("<a>", {
-                                        "class": "match-question-button button semiround",
-                                        "text": "Add a Question"
-                                    })),
-                                $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
-                                    $("<a>", {
-                                        "class": "match-distract-button button semiround",
-                                        "text": "Add a Distractor"
-                                    }))));
-                        break;
+                        case "Free Response":
+                            questionDiv.append($("<h6>", {
+                                "text":"Answer"}),
+                            $("<textarea>"),
+                            $("<br>"));
+                            break;
+
+                        case "Fill in the Blank":
+                            questionDiv.append(
+                                $("<div>",{"class": "ftb-div-1"}).append(
+                                    $("<h6>", {"text": "Content:"}),
+                                    //add something to this text area?
+                                    $("<textarea>", {"class":"ftb-textarea"}),
+                                    $("<div>", {"class": "text-center"}).append(
+                                        //something to identify this?
+                                        $("<a>", {
+                                            "class": "ftb-submit-content-button button semiround",
+                                            "text": "Submit Text Content"
+                                    }))),
+                                $("<div>",{"class": "ftb-div-2"}).append(
+                                    $("<div>", {"class": "row"}).append(
+                                        $("<div>", {"class":"small-8 medium-6 large-8 columns"}).append(
+                                            $("<div>", {"class":"ftb-text panel callout semiround"})),
+                                            $("<a>", {
+                                                "class":"ftb-clear-button button semiround alert small",
+                                                "text":"clear"
+                                            })),
+                                    $("<div>", {"class": "ftb-content-div"})
+                                    ).hide());
+                            break;
+
+                        case "Matching":
+                            questionDiv.append(
+                                $("<div>", {"class":"row"}).append(
+                                    $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
+                                        $("<h4>", {"text": "Questions"})),
+                                    $("<div>", {"class":"small-6 medium-6 large-6 columns"}).append(
+                                        $("<h4>", {"text": "Options"}))
+                                    ),
+                                $("<div>", {"class": "row"}).append(
+                                    $("<div>", {"class": "match-question-div"})),
+                                $("<div>", {"class": "row"}).append(
+                                    $("<div>", {"class": "match-distract-div small-6 medium-6 large-6 columns right"}).append(
+                                        $("<h6>", {"text" : "Distractors"})
+                                        )), //this is to fill up space
+                                $("<div>", {"class": "row"}).append(
+                                    $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
+                                        $("<a>", {
+                                            "class": "match-question-button button semiround",
+                                            "text": "Add a Question"
+                                        })),
+                                    $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
+                                        $("<a>", {
+                                            "class": "match-distract-button button semiround",
+                                            "text": "Add a Distractor"
+                                        }))));
+                            break;
+                    }
                 }
             });
             
@@ -248,9 +257,13 @@
                     $("<input>",{
                         "type": "radio",
                         "name": "mc-rad-group-" + questionNumber,
+                        "checked" : radGroup.html()==""
                     }),
 
                     $("<label>", {"text": addQuestionInput.val()}),
+                    $("<a>", {
+                        "class":"button tiny alert semiround",
+                        "text":"Delete"}),
                     $("<br>")
                 )
                 addQuestionInput.val("");
@@ -329,6 +342,16 @@
                 questionDiv.append($("<input>", {
                     "type":"text"
                 }));
+            });
+
+            $("#accordion").on("click", ".ftb-clear-button", function(){
+                var panel = getPanel($(this));
+                var div1 = panel.find(".ftb-div-1");
+                var div2 = panel.find(".ftb-div-2");
+                var contentDiv = panel.find(".ftb-content-div");
+                contentDiv.html("");
+                div2.hide();
+                div1.show();
             });
 
             //Changes text in header when the prompt textbox loses focus
