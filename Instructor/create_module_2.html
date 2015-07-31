@@ -174,21 +174,26 @@
                 var shouldWarn = false;
                 if(!hasWarned){
                     switch($(this).text()){
+
+                        //if there isn't nothing in the answer textbox
                         case "Free Response":
                             if(String(panel.find(".fr-answer-textbox").val())!=""){
                                 shouldWarn=true;}
                             break;
-                        
+
+                        //if theres isn't nothing in mc rad group
                         case "Multiple Choice":
                             if(panel.find(".mc-rad-group").html()!=""){
                                 shouldWarn=true;}
                             break;
 
+                        //if theres isn't nothing in the original textarea for the ftb question
                         case "Fill in the Blank":
                             if(panel.find(".ftb-textarea").val()!=""){
                                 shouldWarn=true;}
                             break;
-                        //not working
+
+                        //if there isn't nothing in the question div or if the number of input elements in the distract div is not equal to zero 
                         case "Matching":
                             if(panel.find(".match-question-div").html()!=""||panel.find(".match-distract-div").has("input").size()!=0){
                                 shouldWarn=true;}
@@ -200,6 +205,14 @@
                     hasWarned=true;
                     $('#change-question-type-modal').foundation('reveal','open');
                 }
+            });
+
+            //Changes text in header when the prompt textbox loses focus
+            $("#accordion").on("blur", ".prompt", function(){
+                var panel = getPanel($(this));
+                var panelHeader = getPanelHeader(panel);
+                var panelHeaderText = panelHeader.text();
+                panelHeader.text($(this).val() + panelHeaderText.substring(panelHeaderText.indexOf('|')-1)); 
             });
             //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
             $("#accordion").on("click", ".question-type-option", function(){
@@ -380,19 +393,30 @@
                 /*We check if the span has the class "info" if so we do nothing, if it doesnt then
                 we add some classes to make it prettier */
                 if(!$(this).hasClass('info')){
+                    $(this).attr("id", "ftb-span-"+count)
                     $(this).addClass('info label semiround');
                     contentDiv.append(
-                        $("<div>", {"class":"row"}).append(
+                        $("<div>", {
+                            "class":"row",
+                            "id":"ftb-main-div-" + count
+                        }).append(
                             $("<h4>", {"text": $(this).text()}),
                             $("<h6>", {"text":"Distractors"}),
                             //this code is to append a new question  the count is used to keep track of the different words
-                            $("<div>", {"class": "small-12 medium-12 large-12 columns"}).append(
+                            $("<div>", {
+                                "class": "small-12 medium-12 large-12 columns"
+                            }).append(
                                 $("<div>", {"class": "row"}).append(
                                     $("<div>", {"id": "ftb-question-div-" + count, "class":"small-12 medium-12 large-12 columns"})),
                                 $("<a>", {
                                     "id": "ftb-distractor-button-" + count,
                                     "class":"button semiround" , 
                                     "text":"Add a Distractor"
+                                }),
+                                $("<a>", {
+                                    "id": "ftb-delete-button-" + count,
+                                    "class":"button semiround alert", 
+                                    "text":"Delete"
                                 }))));
                 }
             });
@@ -401,11 +425,21 @@
             $("#accordion").on("click", "[id^='ftb-distractor-button-']", function(){ 
                 var panel = getPanel($(this));
                 var id = this.id;
-                questionNumber = id.substring(id.lastIndexOf('-')+1);
+                var questionNumber = id.substring(id.lastIndexOf('-')+1); //this is really counnt?
                 questionDiv = panel.find("#ftb-question-div-" + questionNumber);
                 questionDiv.append($("<input>", {
                     "type":"text"
                 }));
+            });
+
+            //this code appends a new distractor to a specific word when the button is clicked
+            $("#accordion").on("click", "[id^='ftb-delete-button-']", function(){ 
+                var panel = getPanel($(this));
+                var id = this.id;
+                var questionNumber = id.substring(id.lastIndexOf('-')+1); //this is really count?
+                panel.find("#ftb-main-div-"+ questionNumber).remove()
+                panel.find("#ftb-span-" + questionNumber).removeClass();
+
             });
 
             //this basically resets the ftb question
@@ -419,13 +453,6 @@
                 div1.show();
             });
 
-            //Changes text in header when the prompt textbox loses focus
-            $("#accordion").on("blur", ".prompt", function(){
-                var panel = getPanel($(this));
-                var panelHeader = getPanelHeader(panel);
-                var panelHeaderText = panelHeader.text();
-                panelHeader.text($(this).val() + panelHeaderText.substring(panelHeaderText.indexOf('|')-1)); 
-            });
         </script>
     </body>
 </html>
