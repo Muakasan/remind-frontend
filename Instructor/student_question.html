@@ -15,6 +15,7 @@
         <script src="../tag-it-master/js/tag-it.js"></script>
         <link rel="stylesheet" href="../jquery-ui-1.11.4.custom/jquery-ui.css" />
         <link rel="stylesheet" href="../tag-it-master/css/jquery.tagit.css"/>
+        <script src="../js/moment.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#myTags,#myTags2,#myTags3,#myTags4").tagit({
@@ -23,6 +24,17 @@
                     readOnly: true
                 });
             
+            });
+        </script>
+        <link rel='stylesheet' href='../fullcalendar-2.3.2/fullcalendar.css' />
+        <script src='../fullcalendar-2.3.2/fullcalendar.js'></script>
+        <script>
+            $(document).ready(function() {
+                // page is now ready, initialize the calendar...
+                $('#calendar').fullCalendar({
+                dayClick: function() {
+                        alert('a day has been clicked!');
+                    }               })
             });
         </script>
     </head>
@@ -122,7 +134,15 @@
                                                     <div class="panel callout radius" data-equalizer-watch>
                                                         <h4>Create a New</h4>
                                                         <h4>Module</h4>
-                                                        <a href="create_module_1.html" class="close button small semiround success">Create</a>
+                                                        <p><a href="#" data-reveal-id="newModule1" class="semiround button create">Create</a></p>
+                                                        <div id="newModule1" class="reveal-modal xlarge" data-reveal aria-labelledby="newModule1Title" aria-hidden="true" role="dialog">
+                                                          <h2 id="secondModalTitle">Edit your new Module</h2>    
+                                                          <p><textarea placeholder="Enter a Description"></textarea></p>
+                                                          <div id="calendar"></div>
+                                                          <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+                                                          <a href="#" class="close button small semiround tiny success">Submit</a>
+                                                        </div>
+                                                        <a href="edit_module_1.html" class="close button small semiround success">Create</a>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -1156,7 +1176,7 @@
                                             <a class="close-reveal-modal" aria-label="Close">&#215;</a>
                                         </div>
                                     </div>
-                                    <div class="large-12 coulumns">
+                                    <div class="large-12 columns">
                                         Kennedy was alledgedly killed by<a href="#" class="alert tiny button" data-dropdown="hover1" data-options="is_hover:true">Hover over for options</a>. Kennedy was known to be in charge of the US during the<a href="#" class="alert tiny button" data-dropdown="hover2" data-options="is_hover:true">Hover over for options</a> era.
                                         <ul id="hover1" class="f-dropdown" data-dropdown-content>
                                             <li><a href="#"> Lee Harvey Oswald</a></li>
