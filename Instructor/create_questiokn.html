@@ -199,7 +199,7 @@
                                     </div> 
                                     <textarea readonly>Where is the Great Pyramid?</textarea>
                                     <div> 
-                                    <strong>&nbsp;&nbsp;&nbsp;Answer:</strong><br>
+                                    <strong>&nbsp;&nbsp;&nbsp;Answ  er:</strong><br>
                                         <textarea readonly>Giza</textarea>
                                     </div>
                                     <br>
@@ -232,11 +232,13 @@
                                 </div>
                             </li>
                         </ul>
-
                     </div>
                 </div>
     </body>
      <script>
         $(document).foundation();
+        $('a.close').on('click', function() {
+            $(this).foundation('reveal', 'close');
+            });
     </script>
 </html>
