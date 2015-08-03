@@ -344,19 +344,20 @@ $("#accordion").on("click", ".question-type-option", function(){
 $("#accordion").on("click", ".mc-button", function(){
     var panel = getPanel($(this));
     var questionCount = getQuestionCount(panel);
+    count++;
     var radGroup = panel.find(".mc-rad-group");
     var addQuestionInput = panel.find(".mc-add-question-input");
     radGroup.append(
         $("<div>").append(
             $("<input>",{
-                "id":"mc-rad-" + questionCount,
+                "id":"mc-rad-" + count,
                 "type": "radio",
-                "name": "mc-rad-group-" + questionCount,
+                "name": "mc-rad-group-" + getQuestionCount,
                 "checked" : radGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
             }),
             //This label is the actual thing which contains the mc choice text
             $("<label>", {
-                "for":"mc-rad-" + questionCount,
+                "for":"mc-rad-" + count,
                 "text": addQuestionInput.val()
                 }), 
             $("<a>", {
@@ -493,19 +494,19 @@ $("#accordion").on("click", ".ftb-clear-button", function(){
 
 $("#accordion").on("click", ".cb-button", function(){
     var panel = getPanel($(this));
-    var questionCount = getQuestionCount(panel);
+    count++;
     var checkboxGroup = panel.find(".cb-check-group");
     var addQuestionInput = panel.find(".cb-add-question-input");
     checkboxGroup.append(
         $("<div>").append(
             $("<input>",{
-                "id":"cb-checkbox-" + questionCount,
+                "id":"cb-checkbox-" + count,
                 "type": "checkbox",
                 "checked" : checkboxGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
             }),
             //This label is the actual thing which contains the mc choice text
             $("<label>", {
-                "for":"cb-checkbox-" + questionCount,
+                "for":"cb-checkbox-" + count,
                 "text": addQuestionInput.val()
                 }), 
             $("<a>", {
