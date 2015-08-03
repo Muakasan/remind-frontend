@@ -188,14 +188,27 @@ $("#accordion").on("blur", ".prompt", function(){
     panelHeader.find("h5").text($(this).val());
 });
 
-//code to remove a question
-$("#accordion").on("click", ".delete-question-btn", function(){
-    var panel = getPanel($(this));
+var questionDeletePanel;
+//cancels the deletion of a question
+$('a.cancel-delete-modal').on('click', function() {
+    $(this).foundation('reveal', 'close');
+});
+
+//confirms the deletion of a questison
+$('a.delete-delete-modal').on('click', function() {
+    var panel = questionDeletePanel;
     panel.parent().nextAll().each(function(){
         questionNumberSpan = $(this).first().find(".question-number-span");
         questionNumberSpan.text(parseInt(questionNumberSpan.text())-1)
     });
-    panel.parent().remove();
+    panel.parent().remove(); 
+    $(this).foundation('reveal', 'close');
+});
+
+//code to remove a question
+$("#accordion").on("click", ".delete-question-btn", function(){
+    questionDeletePanel = getPanel($(this));
+    $('#delete-modal').foundation('reveal','open');
 });
 
 //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
