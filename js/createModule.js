@@ -4,7 +4,7 @@
     In general the way listeners work is by figuring out which panel they are in 
     by ascending up the tree until they find an id which starts with panel.
     They can then use this panel to locate other elements by class using the find method.
-    mc means multiple choice, ftb means fill in the blank, match is matching (duh) check is checkbox (duh)
+    mc means multiple choice, ftb means fill in the blank, match is matching (duh) cb is checkbox
     and free response questions are fr.
 */
 
@@ -50,7 +50,7 @@ $("#add-question-btn").click(function(){
                 "style":""
                 }).append(
                 $("<div>", {"class":"row"}).append(
-                    $("<div>", {"class":"small-1 medium-1 large-1 columns"}).append(
+                    $("<div>", {"class":"small-1 medium-1 large-1 columns"}).append( 
                         //the question number is in this span
                         $("<span>", { 
                             "class":"question-number-span label semiround",
@@ -98,6 +98,11 @@ $("#add-question-btn").click(function(){
                             })),
                     $("<li>").append(
                         $("<a>", {
+                            "text": "Checkbox",
+                            "class": "question-type-option"
+                            })),
+                    $("<li>").append(
+                        $("<a>", {
                             "text": "Fill in the Blank",
                             "class": "question-type-option"
                             })),
@@ -129,6 +134,7 @@ $("#add-question-btn").click(function(){
         placeholderText: "Add a Tag",
         caseSensitive: false
     });
+
 });
 
 //alerts you if you are about to delete your question data
@@ -161,6 +167,11 @@ $("#accordion").on("click", ".question-type-button", function(){
                 if(panel.find(".match-question-div").html()!=""||panel.find(".match-distract-div").has("input").size()!=0){
                     shouldWarn=true;}
                 break;
+                        //if there isn't nothing in the question div or if the number of input elements in the distract div is not equal to zero 
+            case "Checkbox":
+                if(panel.find(".cb-check-group").html()!=""){
+                    shouldWarn=true;}
+                break;
         }
     }
     
@@ -175,12 +186,15 @@ $("#accordion").on("blur", ".prompt", function(){
     var panel = getPanel($(this));
     var panelHeader = getPanelHeader(panel);
     panelHeader.find("h5").text($(this).val());
-    $(this).val(""); 
 });
 
 //code to remove a question
 $("#accordion").on("click", ".delete-question-btn", function(){
     var panel = getPanel($(this));
+    panel.parent().nextAll().each(function(){
+        questionNumberSpan = $(this).first().find(".question-number-span");
+        questionNumberSpan.text(parseInt(questionNumberSpan.text())-1)
+    });
     panel.parent().remove();
 });
 
@@ -222,6 +236,24 @@ $("#accordion").on("click", ".question-type-option", function(){
                 )
                 break;
 
+             case "Checkbox":
+                questionDiv.append(
+                    $("<p>", {"text": "Choices"}),
+                    $("<div>", {"class":"cb-check-group"}), //The cb choices will be added here
+                    $("<input>", { //The method pulls from this box to add cb choices
+                        "type": "text",
+                        "class": "cb-add-question-input",
+                        "placeholder": "New Choice"
+                    }),
+                    $("<div>", {"class": "text-center"}).append(
+                        $("<a>", {                                    
+                            "class": "button success semiround small cb-button",
+                            "text": "Add Choice"
+                        })
+                    )
+                )
+                break;
+
             case "Fill in the Blank":
                 questionDiv.append(
                     //this div is originally shown to allow the user to input the content
@@ -240,7 +272,7 @@ $("#accordion").on("click", ".question-type-option", function(){
                                 $("<div>", {"class":"ftb-text panel callout semiround"})), //this is where the text from the inputted content will be
                                 $("<a>", {
                                     "class":"ftb-clear-button button semiround alert small",
-                                    "text":"clear"
+                                    "text":"Clear"
                                 })),
                         $("<div>", {"class": "ftb-content-div"}) //The questions will be attached to this div
                         ).hide());
@@ -273,6 +305,24 @@ $("#accordion").on("click", ".question-type-option", function(){
                                 "text": "Add a Distractor"
                             }))));
                 break;
+
+            case "Checkbox":
+                questionDiv.append(
+                    $("<p>", {"text": "Choices"}),
+                    $("<div>", {"class":"cb-check-group"}), //The checkbox choices will be added here
+                    $("<input>", { //The method pulls from this box to add checkbox choices
+                        "type": "text",
+                        "class": "cb-add-question-input",
+                        "placeholder": "New Choice"
+                    }),
+                    $("<div>", {"class": "text-center"}).append(
+                        $("<a>", {                                    
+                            "class": "button success semiround small cb-button",
+                            "text": "Add Choice"
+                        })
+                    )
+                )
+                break;
         }
     }
 });
@@ -286,12 +336,16 @@ $("#accordion").on("click", ".mc-button", function(){
     radGroup.append(
         $("<div>").append(
             $("<input>",{
+                "id":"mc-rad-" + questionCount,
                 "type": "radio",
                 "name": "mc-rad-group-" + questionCount,
                 "checked" : radGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
             }),
-
-            $("<label>", {"text": addQuestionInput.val()}), //This label is the actual thing which contains the mc choice text
+            //This label is the actual thing which contains the mc choice text
+            $("<label>", {
+                "for":"mc-rad-" + questionCount,
+                "text": addQuestionInput.val()
+                }), 
             $("<a>", {
                 "class":"mc-delete-button button tiny alert semiround",
                 "text":"Delete"}),
@@ -299,9 +353,10 @@ $("#accordion").on("click", ".mc-button", function(){
     ));
     addQuestionInput.val(""); //reset the input field when we add an mc option
 });
+
 $("#accordion").on("click", ".mc-delete-button", function(){
-//gets surrounding div and deletes it
-$(this).parent().remove();
+    //gets surrounding div and deletes it
+    $(this).parent().remove();
 });
 
 //Matching Questions
@@ -419,4 +474,36 @@ $("#accordion").on("click", ".ftb-clear-button", function(){
     contentDiv.html(""); //We're removing any questions that we made
     div2.hide(); // Here we swap the 2 div's
     div1.show();
+});
+
+//Checkbox Questions
+
+$("#accordion").on("click", ".cb-button", function(){
+    var panel = getPanel($(this));
+    var questionCount = getQuestionCount(panel);
+    var checkboxGroup = panel.find(".cb-check-group");
+    var addQuestionInput = panel.find(".cb-add-question-input");
+    checkboxGroup.append(
+        $("<div>").append(
+            $("<input>",{
+                "id":"cb-checkbox-" + questionCount,
+                "type": "checkbox",
+                "checked" : checkboxGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
+            }),
+            //This label is the actual thing which contains the mc choice text
+            $("<label>", {
+                "for":"cb-checkbox-" + questionCount,
+                "text": addQuestionInput.val()
+                }), 
+            $("<a>", {
+                "class":"cb-delete-button button tiny alert semiround",
+                "text":"Delete"}),
+            $("<br>")
+    ));
+    addQuestionInput.val(""); //reset the input field when we add an mc option
+});
+
+$("#accordion").on("click", ".cb-delete-button", function(){
+    //gets surrounding div and deletes it
+    $(this).parent().remove();
 });
