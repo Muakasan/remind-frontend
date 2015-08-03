@@ -6,7 +6,6 @@
         <title>Create Module</title>
         <link rel="stylesheet" href="../css/foundation.css"/>
         <link rel="stylesheet" href="../css/remind-style.css">
-        <link rel="stylesheet" href="../css/remind-style.css" />
         <script src="../js/vendor/modernizr.js"></script>
         <script src="../js/vendor/jquery.js"></script>
         <script src="../js/foundation.min.js"></script>
@@ -97,8 +96,21 @@
                     $("<li>", {"class":"accordion-navigation"}).append(
                         $("<a>", {
                             "href": "#panel-" + count,
-                            "text": "New Question | Question Type"
-                            }),
+                            "style":""
+                            }).append(
+                            $("<div>", {"class":"row"}).append(
+                                $("<div>", {"class":"small-1 medium-1 large-1 columns"}).append(
+                                    $("<span>", {
+                                        "class":"label semiround",
+                                        "text":"1"
+                                        })), 
+                            $("<div>", {"class":"small-11 medium-11 large-11 columns"}).append(
+                                $("<h5>", {
+                                    "class":"same-line",
+                                    "text":"New Question"
+                                    }),
+                                $("<br>"),
+                                $("<label>", {"text":"Free Response"})))),
                         $("<div>", {
                             "id": "panel-" + count,
                             "class": "content"
@@ -121,25 +133,21 @@
                                 }).append(
                                 $("<li>").append(
                                     $("<a>", {
-                                        "href": "#",
                                         "text": "Free Response",
                                         "class": "question-type-option"
                                         })),
                                 $("<li>").append(
                                     $("<a>", {
-                                        "href": "#",
                                         "text": "Multiple Choice",
                                         "class": "question-type-option"
                                         })),
                                 $("<li>").append(
                                     $("<a>", {
-                                        "href": "#",
                                         "text": "Fill in the Blank",
                                         "class": "question-type-option"
                                         })),
                                 $("<li>").append(
                                     $("<a>", {
-                                        "href": "#",
                                         "text": "Matching",
                                         "class": "question-type-option"
                                         }
@@ -211,8 +219,8 @@
             $("#accordion").on("blur", ".prompt", function(){
                 var panel = getPanel($(this));
                 var panelHeader = getPanelHeader(panel);
-                var panelHeaderText = panelHeader.text();
-                panelHeader.text($(this).val() + panelHeaderText.substring(panelHeaderText.indexOf('|')-1)); 
+                panelHeader.find("h5").text($(this).val());
+                $(this).val(""); 
             });
             //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
             $("#accordion").on("click", ".question-type-option", function(){
@@ -222,9 +230,7 @@
                     dropdownButton.text(questionType);
                     var panel = getPanel($(this)); //gets the panel
                     var panelHeader = getPanelHeader(panel);
-                    var panelHeaderText = panelHeader.text();
-                    panelHeader.text(panelHeaderText.substring(0, panelHeaderText.indexOf('|')+2)+questionType); 
-                    
+                    panelHeader.find("label").text($(this).text());
                     var questionDiv = panel.children(".question-div");
                     questionDiv.html("");
                     //This switch determines the question type based on the dropdown that was clicked
