@@ -1,11 +1,8 @@
 /* IMPORTANT ORGANIZATIONAL NOTES:
-    The Basic division of this page is based on the accordion navigation li's to add new question.
-    Each of these li's have a div with an id of panel + someCount.
-    In general the way listeners work is by figuring out which panel they are in 
-    by ascending up the tree until they find an id which starts with panel.
-    They can then use this panel to locate other elements by class using the find method.
-    mc means multiple choice, ftb means fill in the blank, match is matching (duh) cb is checkbox
-    and free response questions are fr.
+    ftb: Fill in the blank
+    mc: Muliple Choice
+    match: Matching
+    cb: Checkbox
 */
 
 //Gets the id by looking for the last '- ' and then taking the rest of the string
