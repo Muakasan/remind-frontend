@@ -4,264 +4,92 @@
     match: Matching
     cb: Checkbox
 */
+var count=0; //
 
-//Gets the id by looking for the last '- ' and then taking the rest of the string
-var getQuestionCount = function(panel){
-    panelId = panel.attr("id");
-    return String(panelId.substring(panelId.indexOf('-')+1));
-}
-
-//Goes upwards in the HTML tree until it finds an element with an id which stars with panel
-var getPanel = function(element){
-    return element.closest("[id^='panel']");
-}
-
-//gets the panel header by finding the first element inside the panel
-var getPanelHeader = function (panel){
-    return panel.parent().children().first();
-}
-
-var count = 0; //count which is used to autoincrement id's
 var hasWarned = false; //used to warn you if you are going to delete your data when you change the question, resets each time you make a question
 
-// code to create a new question by adding to the accordion
-$("#add-question-btn").click(function(){ 
-    count++;
-    hasWarned=false; //tries to reset if should warn after adding a question, slight problem here, if you add a new question "b" and then you try to modify the question type of question "a" after its already warned you, it will warn you about "a" again and then if you try to change the type of "b" it will not warn you
-    var questionNumber = 1;
-    //only if accordion already has entries
-    if ($("#accordion").has("li").length!=0){
-        //finds last question number in the accordion and then add's one 
-        questionNumber = parseInt($('#accordion').find(".question-number-span").last().text());
-        questionNumber++;
-    }
-
-    //attach a question to the accordion
-    $("#accordion").append(
-        //each "tab is stores as an li with the accordian navigation class"
-        $("<li>", {"class":"accordion-navigation"}).append(
-            //this is the header of the question accordion tab
-            $("<a>", {
-                "href": "#panel-" + count,
-                "style":""
-                }).append(
-                $("<div>", {"class":"row"}).append(
-                    $("<div>", {"class":"small-1 medium-1 large-1 columns"}).append( 
-                        //the question number is in this span
-                        $("<span>", { 
-                            "class":"question-number-span label semiround",
-                            "text": questionNumber
-                            })), 
-                $("<div>", {"class":"small-11 medium-11 large-11 columns"}).append(
-                    //The Question Text is in this header
-                    $("<h5>", { 
-                        "class":"same-line",
-                        "text":"New Question"
-                        }),
-                    $("<br>"),
-                    //The Question type is in this label
-                    $("<label>", {"text":"Free Response"})))),
-            $("<div>", {
-                "id": "panel-" + count,
-                "class": "content"
-                }).append(
-                //this handles the prompt text
-                $("<a>",{"text":"Delete", "class":"delete-question-btn button alert right semiround"}),
-                $("<h4>",{"text":"Prompt:"}),
-                $("<textarea>", {"class": "prompt"}),
-                //this handles the question type dropdown menu
-                //the data-dropdown field must be the same as the corresponding ul's id for them to attach
-                $("<button>",{
-                    "data-dropdown": "question-type-drop-" + count,
-                    "class": "question-type-button button dropdown semiround",
-                    "text": "Free Response",
-                    }),
-                $("<ul>", {
-                    "data-dropdown-content": true,
-                    "id": "question-type-drop-" + count,
-                    "class": "f-dropdown semiround",
-                    "aria-hidden": true,
-                    }).append(
-                    $("<li>").append(
-                        $("<a>", {
-                            "text": "Free Response",
-                            "class": "question-type-option"
-                            })),
-                    $("<li>").append(
-                        $("<a>", {
-                            "text": "Multiple Choice",
-                            "class": "question-type-option"
-                            })),
-                    $("<li>").append(
-                        $("<a>", {
-                            "text": "Checkbox",
-                            "class": "question-type-option"
-                            })),
-                    $("<li>").append(
-                        $("<a>", {
-                            "text": "Fill in the Blank",
-                            "class": "question-type-option"
-                            })),
-                    $("<li>").append(
-                        $("<a>", {
-                            "text": "Matching",
-                            "class": "question-type-option"
-                            }
-                        )
-                    )                                
-                ),
-                $("<div>", {
-                    "class": "question-div"
-                }).append( //this code appends the original free response question
-                    $("<h6>", {
-                        "text":"Answer"}),
-                    $("<textarea>", {"class":"fr-answer-textbox"}),
-                    $("<br>")),
-                $("<h4>", {"text":"Tags:"}),
-                //This ul turns into the "input field for the tags"
-                $("<ul>", {
-                    "id": "myTags-" + count
-                })
-            )
-        )
-    );
-    //tags are created by putting a ul in the html code with an id and then calling the following tagit code with a corresponding id 
-    $("#myTags-" + count).tagit({
+//changes the ul into a tag input field
+$("#myTags").tagit({
         placeholderText: "Add a Tag",
         caseSensitive: false
     });
 
-});
-
 //alerts you if you are about to delete your question data
-$("#accordion").on("click", ".question-type-button", function(){
-    var panel = getPanel($(this));
+$("#question-type-button").click(function(){
     var shouldWarn = false; //so this doesnt warn you multiple times
     if(!hasWarned){
         switch($(this).text()){
 
             //if there isn't nothing in the answer textbox
             case "Free Response":
-                if(String(panel.find(".fr-answer-textbox").val())!=""){
+                if($("#fr-answer-textbox").val()!=""){
                     shouldWarn=true;}
                 break;
 
             //if theres isn't nothing in mc rad group
             case "Multiple Choice":
-                if(panel.find(".mc-rad-group").html()!=""){
+                if($("#mc-rad-group").html()!=""){
                     shouldWarn=true;}
                 break;
 
             //if theres isn't nothing in the original textarea for the ftb question
             case "Fill in the Blank":
-                if(panel.find(".ftb-textarea").val()!=""){
+                if($("#ftb-textarea").val()!=""){
                     shouldWarn=true;}
                 break;
-
+                //broken
             //if there isn't nothing in the question div or if the number of input elements in the distract div is not equal to zero 
             case "Matching":
-                if(panel.find(".match-question-div").html()!=""||panel.find(".match-distract-div").has("input").size()!=0){
+                if($("#match-question-div").html()!=""||$("#match-distract-div").has("input").size()!=0){
                     shouldWarn=true;}
                 break;
+                //broken
                         //if there isn't nothing in the question div or if the number of input elements in the distract div is not equal to zero 
             case "Checkbox":
-                if(panel.find(".cb-check-group").html()!=""){
+                if($("#cb-check-group").html()!=""){
                     shouldWarn=true;}
                 break;
+            }
         }
-    }
-    
+        
     if(shouldWarn){
         hasWarned=true;
         $('#change-question-type-modal').foundation('reveal','open');
     }
 });
 
-//Updating Prompt
-//Changes text in header when the prompt textbox loses focus
-$("#accordion").on("blur", ".prompt", function(){
-    var panel = getPanel($(this));
-    var panelHeader = getPanelHeader(panel);
-    panelHeader.find("h5").text($(this).val());
-});
-
-//Question Deletion
-//variable to store which panel should be deleted
-var questionDeletePanel;
-
-//cancels the deletion of a question
-$('a.cancel-delete-modal').on('click', function() {
-    $(this).foundation('reveal', 'close');
-});
-
-//confirms the deletion of a questison
-$('a.delete-delete-modal').on('click', function() {
-    var panel = questionDeletePanel;
-    panel.parent().nextAll().each(function(){
-        questionNumberSpan = $(this).first().find(".question-number-span");
-        questionNumberSpan.text(parseInt(questionNumberSpan.text())-1)
-    });
-    panel.parent().remove(); 
-    $(this).foundation('reveal', 'close');
-});
-
-//code to remove a question
-$("#accordion").on("click", ".delete-question-btn", function(){
-    questionDeletePanel = getPanel($(this));
-    $('#delete-modal').foundation('reveal','open');
-});
 
 //Changing Question Type
 //checks when the dropdown is clicked by looking for li elements which are descendents of the content class
-$("#accordion").on("click", ".question-type-option", function(){
+$(".question-type-option").click(function(){
     var questionType = $(this).text(); //gets the text from the li that was clicked
-    var dropdownButton =  $(this).parent().parent().prev();
+    var dropdownButton =  $("#question-type-button");
     if(dropdownButton.text()!=questionType){ //changes the dropdown buttons text to the li's text
         dropdownButton.text(questionType);
-        var panel = getPanel($(this)); //gets the panel
-        var panelHeader = getPanelHeader(panel);
-        panelHeader.find("label").text($(this).text());
-        var questionDiv = panel.children(".question-div");
+        var questionDiv = $("#question-div");
         questionDiv.html("");
         //This switch determines the question type based on the dropdown that was clicked
         switch(questionType){ 
             case "Free Response":
                 questionDiv.append($("<h6>", {
                     "text":"Answer"}),
-                $("<textarea>", {"class": "fr-answer-textbox"}),
+                $("<textarea>", {"id": "fr-answer-textbox"}),
                 $("<br>"));
                 break;
             
             case "Multiple Choice":
                 questionDiv.append(
                     $("<p>", {"text": "Choices"}),
-                    $("<div>", {"class":"mc-rad-group"}), //The mc choices will be added here
+                    $("<div>", {"id":"mc-rad-group"}), //The mc choices will be added here
                     $("<input>", { //The method pulls from this box to add mc choices
                         "type": "text",
-                        "class": "mc-add-question-input",
+                        "id": "mc-add-question-input",
                         "placeholder": "New Choice"
                     }),
                     $("<div>", {"class": "text-center"}).append(
                         $("<a>", {                                    
-                            "class": "button success semiround small mc-button",
-                            "text": "Add Choice"
-                        })
-                    )
-                )
-                break;
-
-             case "Checkbox":
-                questionDiv.append(
-                    $("<p>", {"text": "Choices"}),
-                    $("<div>", {"class":"cb-check-group"}), //The cb choices will be added here
-                    $("<input>", { //The method pulls from this box to add cb choices
-                        "type": "text",
-                        "class": "cb-add-question-input",
-                        "placeholder": "New Choice"
-                    }),
-                    $("<div>", {"class": "text-center"}).append(
-                        $("<a>", {                                    
-                            "class": "button success semiround small cb-button",
+                            "class": "button success semiround small",
+                            "id":"mc-button",
                             "text": "Add Choice"
                         })
                     )
@@ -271,24 +99,26 @@ $("#accordion").on("click", ".question-type-option", function(){
             case "Fill in the Blank":
                 questionDiv.append(
                     //this div is originally shown to allow the user to input the content
-                    $("<div>",{"class": "ftb-div-1"}).append(
+                    $("<div>",{"id": "ftb-div-1"}).append(
                         $("<h6>", {"text": "Content:"}),
-                        $("<textarea>", {"class":"ftb-textarea"}),
+                        $("<textarea>", {"id":"ftb-textarea"}),
                         $("<div>", {"class": "text-center"}).append(
                             $("<a>", {
-                                "class": "ftb-submit-content-button button semiround",
+                                "id":"ftb-submit-content-button",
+                                "class": "button semiround",
                                 "text": "Submit Text Content"
                         }))),
                     //this div will be shown after the user has submitted the content
-                    $("<div>",{"class": "ftb-div-2"}).append(
+                    $("<div>",{"id": "ftb-div-2"}).append(
                         $("<div>", {"class": "row"}).append(
                             $("<div>", {"class":"small-8 medium-6 large-8 columns"}).append(
-                                $("<div>", {"class":"ftb-text panel callout semiround"})), //this is where the text from the inputted content will be
+                                $("<div>", {"id":"ftb-text", "class":"panel callout semiround"})), //this is where the text from the inputted content will be
                                 $("<a>", {
-                                    "class":"ftb-clear-button button semiround alert small",
+                                    "id":"ftb-clear-button",
+                                    "class":"button semiround alert small",
                                     "text":"Clear"
                                 })),
-                        $("<div>", {"class": "ftb-content-div"}) //The questions will be attached to this div
+                        $("<div>", {"id": "ftb-content-div"}) //The questions will be attached to this div
                         ).hide());
                 break;
 
@@ -301,21 +131,23 @@ $("#accordion").on("click", ".question-type-option", function(){
                             $("<h4>", {"text": "Options"}))
                         ),
                     $("<div>", {"class": "row"}).append(
-                        $("<div>", {"class": "match-question-div"})), //matching questions will be appended here
+                        $("<div>", {"id": "match-question-div"})), //matching questions will be appended here
                     $("<div>", {"class": "row"}).append(
                         //distractors will be appended here
-                        $("<div>", {"class": "match-distract-div small-6 medium-6 large-6 columns right"}).append(
+                        $("<div>", {"id":"match-distract-div", "class": "small-6 medium-6 large-6 columns right"}).append(
                             $("<h6>", {"text" : "Distractors"}) 
                             )), 
                     $("<div>", {"class": "row"}).append(
                         $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
                             $("<a>", {
-                                "class": "match-question-button button semiround",
+                                "id":"match-question-button",
+                                "class": "button semiround",
                                 "text": "Add a Question"
                             })),
                         $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
                             $("<a>", {
-                                "class": "match-distract-button button semiround",
+                                "id":"match-distract-button", 
+                                "class": "button semiround",
                                 "text": "Add a Distractor"
                             }))));
                 break;
@@ -323,15 +155,16 @@ $("#accordion").on("click", ".question-type-option", function(){
             case "Checkbox":
                 questionDiv.append(
                     $("<p>", {"text": "Choices"}),
-                    $("<div>", {"class":"cb-check-group"}), //The checkbox choices will be added here
+                    $("<div>", {"id":"cb-check-group"}), //The checkbox choices will be added here
                     $("<input>", { //The method pulls from this box to add checkbox choices
                         "type": "text",
-                        "class": "cb-add-question-input",
+                        "id": "cb-add-question-input",
                         "placeholder": "New Choice"
                     }),
                     $("<div>", {"class": "text-center"}).append(
                         $("<a>", {                                    
-                            "class": "button success semiround small cb-button",
+                            "id":"cb-button",
+                            "class": "button success semiround small",
                             "text": "Add Choice"
                         })
                     )
@@ -342,18 +175,16 @@ $("#accordion").on("click", ".question-type-option", function(){
 });
 
 //Mutiple Choice Questions
-$("#accordion").on("click", ".mc-button", function(){
-    var panel = getPanel($(this));
-    var questionCount = getQuestionCount(panel);
+$(document).on("click","#mc-button", function(){
     count++;
-    var radGroup = panel.find(".mc-rad-group");
-    var addQuestionInput = panel.find(".mc-add-question-input");
+    var radGroup = $("#mc-rad-group");
+    var addQuestionInput = $("#mc-add-question-input");
     radGroup.append(
         $("<div>").append(
             $("<input>",{
                 "id":"mc-rad-" + count,
                 "type": "radio",
-                "name": "mc-rad-group-" + getQuestionCount,
+                "name": "mc-rad-group",
                 "checked" : radGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
             }),
             //This label is the actual thing which contains the mc choice text
@@ -369,15 +200,14 @@ $("#accordion").on("click", ".mc-button", function(){
     addQuestionInput.val(""); //reset the input field when we add an mc option
 });
 
-$("#accordion").on("click", ".mc-delete-button", function(){
+$(document).on("click", ".mc-delete-button", function(){
     //gets surrounding div and deletes it
     $(this).parent().remove();
 });
 
 //Matching Questions
-$("#accordion").on("click", ".match-question-button", function(){
-    var panel = getPanel($(this));
-    var matchQuestionDiv = panel.find(".match-question-div");
+$(document).on("click", "#match-question-button", function(){
+    var matchQuestionDiv = $("#match-question-div");
     matchQuestionDiv.append(
         $("<div>", {"class": "row collapse"}).append(
             $("<div>", {"class": "small-6 medium-6 large-6 columns"}).append(
@@ -396,9 +226,8 @@ $("#accordion").on("click", ".match-question-button", function(){
         ))
 });
 
-$("#accordion").on("click", ".match-distract-button", function(){
-    var panel = getPanel($(this));
-    var matchDistractDiv = panel.find(".match-distract-div");
+$(document).on("click", "#match-distract-button", function(){
+    var matchDistractDiv = $("#match-distract-div");
     matchDistractDiv.append(
         $("<input>", {
             "type": "text"
@@ -406,14 +235,13 @@ $("#accordion").on("click", ".match-distract-button", function(){
 });
 
 //Fill in the Blank Questions
-$("#accordion").on("click", ".ftb-submit-content-button", function(){
-    var panel = getPanel($(this));
-    var div1 = panel.find(".ftb-div-1");
-    var div2 = panel.find(".ftb-div-2");
+$(document).on("click", "#ftb-submit-content-button", function(){
+    var div1 = $("#ftb-div-1");
+    var div2 = $("#ftb-div-2");
     div1.hide();
     //Copies content from ftb-textarea into ftb-text
-    panel.find(".ftb-text").text(panel.find(".ftb-textarea").val());
-    panel.find(".ftb-text").each(function() {
+    $("#ftb-text").text($("#ftb-textarea").val());
+    $("#ftb-text").each(function() {
         /* Essentially this takes the text from ftb-text and then converts each word into a span
         yay regex... so basically any combination of letters or numbers or aprostrophes 
         will be accepted the $1 means that it wants the first thing 
@@ -424,10 +252,9 @@ $("#accordion").on("click", ".ftb-submit-content-button", function(){
 });
 //Why doesnt this work?: $("accordion").on("click", "span", function(){
 //So when we click on one of those magic regex created spans this method is called
-$(document).on("click", ".ftb-text span", function(){
+$(document).on("click", "#ftb-text span", function(){
     count++;
-    var panel = getPanel($(this));
-    var contentDiv = panel.find(".ftb-content-div"); 
+    var contentDiv = $("#ftb-content-div"); 
     /*We check if the span has the class "info" if so we do nothing, if it doesnt then
     we add some classes to make it prettier */
     if(!$(this).hasClass('info')){
@@ -460,51 +287,47 @@ $(document).on("click", ".ftb-text span", function(){
 });
 
 //this code appends a new distractor to a specific word when the button is clicked
-$("#accordion").on("click", "[id^='ftb-distractor-button-']", function(){ 
-    var panel = getPanel($(this));
+$(document).on("click", "[id^='ftb-distractor-button-']", function(){ 
     var id = this.id;
     var questionCount = id.substring(id.lastIndexOf('-')+1); 
-    questionDiv = panel.find("#ftb-question-div-" + questionCount);
+    var questionDiv = $("#ftb-question-div-" + questionCount);
     questionDiv.append($("<input>", {
         "type":"text"
     }));
 });
 
 //this code appends a new distractor to a specific word when the button is clicked
-$("#accordion").on("click", "[id^='ftb-delete-button-']", function(){ 
-    var panel = getPanel($(this));
+$(document).on("click", "[id^='ftb-delete-button-']", function(){ 
     var id = this.id;
     var questionCount = id.substring(id.lastIndexOf('-')+1); 
-    panel.find("#ftb-main-div-"+ questionCount).remove()
-    panel.find("#ftb-span-" + questionCount).removeClass();
+    $("#ftb-main-div-"+ questionCount).remove()
+    $("#ftb-span-" + questionCount).removeClass();
 
 });
 
 //this basically resets the ftb question
-$("#accordion").on("click", ".ftb-clear-button", function(){
-    var panel = getPanel($(this));
-    var div1 = panel.find(".ftb-div-1");
-    var div2 = panel.find(".ftb-div-2");
-    var contentDiv = panel.find(".ftb-content-div");
+$(document).on("click", "#ftb-clear-button", function(){
+    var div1 = $("#ftb-div-1");
+    var div2 = $("#ftb-div-2");
+    var contentDiv = $("#ftb-content-div");
     contentDiv.html(""); //We're removing any questions that we made
     div2.hide(); // Here we swap the 2 div's
     div1.show();
 });
 
 //Checkbox Questions
-$("#accordion").on("click", ".cb-button", function(){
-    var panel = getPanel($(this));
+$(document).on("click", "#cb-button", function(){
     count++;
-    var checkboxGroup = panel.find(".cb-check-group");
-    var addQuestionInput = panel.find(".cb-add-question-input");
+    var checkboxGroup = $("#cb-check-group");
+    var addQuestionInput = $("#cb-add-question-input");
     checkboxGroup.append(
         $("<div>").append(
             $("<input>",{
                 "id":"cb-checkbox-" + count,
                 "type": "checkbox",
-                "checked" : checkboxGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
+                "checked" : checkboxGroup.html()=="" //if the checkbox group doesnt have any html(it's empty) the checkbox is checked, so first checkbox is checked
             }),
-            //This label is the actual thing which contains the mc choice text
+            //This label is the actual thing which contains check choice text
             $("<label>", {
                 "for":"cb-checkbox-" + count,
                 "text": addQuestionInput.val()
@@ -514,10 +337,10 @@ $("#accordion").on("click", ".cb-button", function(){
                 "text":"Delete"}),
             $("<br>")
     ));
-    addQuestionInput.val(""); //reset the input field when we add an mc option
+    addQuestionInput.val(""); //reset the input field when we add an cb option
 });
 
-$("#accordion").on("click", ".cb-delete-button", function(){
+$(document).on("click", ".cb-delete-button", function(){
     //gets surrounding div and deletes it
     $(this).parent().remove();
 });

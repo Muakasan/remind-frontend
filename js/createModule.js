@@ -322,24 +322,6 @@ $("#accordion").on("click", ".question-type-option", function(){
                                 "text": "Add a Distractor"
                             }))));
                 break;
-
-            case "Checkbox":
-                questionDiv.append(
-                    $("<p>", {"text": "Choices"}),
-                    $("<div>", {"class":"cb-check-group"}), //The checkbox choices will be added here
-                    $("<input>", { //The method pulls from this box to add checkbox choices
-                        "type": "text",
-                        "class": "cb-add-question-input",
-                        "placeholder": "New Choice"
-                    }),
-                    $("<div>", {"class": "text-center"}).append(
-                        $("<a>", {                                    
-                            "class": "button success semiround small cb-button",
-                            "text": "Add Choice"
-                        })
-                    )
-                )
-                break;
         }
     }
 });
@@ -505,9 +487,9 @@ $("#accordion").on("click", ".cb-button", function(){
             $("<input>",{
                 "id":"cb-checkbox-" + count,
                 "type": "checkbox",
-                "checked" : checkboxGroup.html()=="" //if the rad group doesnt have any html(it's empty) the radio is check, so first radio is checked
+                "checked" : checkboxGroup.html()=="" //if the check group doesnt have any html(it's empty) the checkbox is checked, so first checkbox is checked
             }),
-            //This label is the actual thing which contains the mc choice text
+            //This label is the actual thing which contains the cb choice text
             $("<label>", {
                 "for":"cb-checkbox-" + count,
                 "text": addQuestionInput.val()
@@ -517,7 +499,7 @@ $("#accordion").on("click", ".cb-button", function(){
                 "text":"Delete"}),
             $("<br>")
     ));
-    addQuestionInput.val(""); //reset the input field when we add an mc option
+    addQuestionInput.val(""); //reset the input field when we add an cb option
 });
 
 $("#accordion").on("click", ".cb-delete-button", function(){
